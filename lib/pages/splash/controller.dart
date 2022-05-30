@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:ibase_app/common/router/router.dart';
+import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/pages/splash/splash.dart';
 
@@ -16,13 +18,11 @@ class SplashController extends GetxController {
   @override
   void onReady() {
     LogUtils.GGQ('启动页---> onReady');
-    // if(ConfigStore.to.isHomeOpen) {
-      // Get.offAndToNamed(AppRoutes.HOME);
-      //Get.offAndToNamed(AppRoutes.TEST);
-    // } else {
-     // Get.offAndToNamed(AppRoutes.WELCOME);
-    // }
-    // Get.offAndToNamed(AppRoutes.WELCOME);
+    if(ConfigService.to.isHomeOpen) {
+      Get.offAndToNamed(AppRoutes.HOME);
+    } else {
+     Get.offAndToNamed(AppRoutes.WELCOME);
+    }
     super.onReady();
   }
 

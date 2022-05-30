@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/pages/welcome/welcome.dart';
 
 class WelcomeController extends GetxController{
@@ -12,6 +13,6 @@ class WelcomeController extends GetxController{
   }
 
   void toHome() {
-    // Get.toNamed(AppRoutes.HOME);
+    Get.offAndToNamed(AppRoutes.HOME);
   }
 }

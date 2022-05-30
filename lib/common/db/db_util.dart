@@ -8,7 +8,7 @@ import 'db.dart';
 
 class DBUtil{
   /// 实例
-  static late DBUtil instance;
+  static DBUtil? instance;
 
   /// 用户信息
   late Box userBox;
@@ -26,22 +26,22 @@ class DBUtil{
   }
 
   /// 初始化 Box
-  static Future<DBUtil> getInstance() async {
+  static Future<DBUtil?> getInstance() async {
     if (instance == null) {
       instance = DBUtil();
       // await Hive.initFlutter();
-      instance.userBox = await Hive.openBox('user');
+      instance?.userBox = await Hive.openBox('user');
     }
     return instance;
   }
 
   //---------用户信息----------------
-  Future<int> saveUser(User user) async{
-    return Global.dbUtil.userBox.add(user);
+  Future<int?> saveUser(User user) async{
+    return Global.dbUtil?.userBox.add(user);
   }
 
   User? getUser(){
-    final users = Global.dbUtil.userBox.values;
+    final users = Global.dbUtil?.userBox.values;
     if(users != null && users.isNotEmpty){
       return users.last;
     }

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ibase_app/common/db/db_util.dart';
+import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 
 ///全局初始化
 class Global{
 
-  static late DBUtil dbUtil;
+  static DBUtil? dbUtil;
 
   static Future<void> init() async {
      // 运行初始
@@ -17,9 +18,11 @@ class Global{
 
      setSystemUi();
      Loading();
-     DBUtil.install();
+     await DBUtil.install();
      dbUtil = await DBUtil.getInstance();
-
+     await StorageUtil().init();
+    // 业务服务
+    Get.put<ConfigService>(ConfigService());
   }
 
 

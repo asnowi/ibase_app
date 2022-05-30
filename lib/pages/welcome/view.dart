@@ -14,7 +14,7 @@ class WelcomeView extends GetView<WelcomeController> {
           onPressed: (){
             controller.toHome();
           },
-          child: const Text('确定'),
+          child: const Text('欢迎页'),
         ),
       ),
     );
