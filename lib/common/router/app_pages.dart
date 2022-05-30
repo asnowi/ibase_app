@@ -48,7 +48,7 @@ class AppPages {
     /// 首页
     GetPage(
       name: AppRoutes.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
       transition: Transition.fadeIn,
       // transitionDuration: _transitionDuration,
