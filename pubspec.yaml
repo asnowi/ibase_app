@@ -78,6 +78,9 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   # 加密
   crypto: ^3.0.2
+  # 指示器
+  smooth_page_indicator: ^1.0.0+2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

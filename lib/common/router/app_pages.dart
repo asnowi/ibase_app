@@ -24,14 +24,14 @@ class AppPages {
     /// 启动页
     GetPage(
       name: INITIAL,
-      page: () => const SplashView(),
+      page: () => SplashView(),
       binding: SplashBinding()
     ),
 
     /// 登录页
     GetPage(
       name: AppRoutes.LOGIN,
-      page: () => const LoginView(),
+      page: () => LoginView(),
       binding: LoginBinding(),
       transitionDuration: _transitionDuration
     ),
@@ -39,7 +39,7 @@ class AppPages {
     /// 欢迎页
     GetPage(
       name: AppRoutes.WELCOME,
-      page: () => const WelcomeView(),
+      page: () => WelcomeView(),
       binding: WelcomeBinding(),
       transition: Transition.fadeIn,
       // transitionDuration: _transitionDuration,
@@ -59,7 +59,7 @@ class AppPages {
   static GetPage unknownPage(){
     return GetPage(
     name: AppRoutes.UNKNOWN,
-    page: () => const UnknownView(),
+    page: () => UnknownView(),
     binding: UnknownBinding(),
     transition: Transition.fadeIn);
   }

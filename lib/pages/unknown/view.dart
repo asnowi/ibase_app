@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'unknown.dart';
 
 class UnknownView extends GetView<UnknownController>{
-  const UnknownView({Key? key}) : super(key: key);
+  UnknownView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

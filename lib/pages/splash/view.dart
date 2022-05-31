@@ -5,7 +5,7 @@ import 'package:ibase_app/common/utils/utils.dart';
 import 'splash.dart';
 
 class SplashView extends GetView<SplashController> {
-  const SplashView({Key? key}) : super(key: key);
+  SplashView({Key? key}) : super(key: key);
 
 
   @override
