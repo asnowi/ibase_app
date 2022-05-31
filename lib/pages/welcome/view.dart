@@ -45,7 +45,7 @@ class WelcomeView extends GetView<WelcomeController> {
   Widget _buildIndicator(){
     return Container(
       alignment: Alignment.bottomCenter,
-      margin: EdgeInsets.only(bottom: 90.h),
+      margin: EdgeInsets.only(bottom: 60.h),
       child: SmoothPageIndicator(
         controller: pageController,
         count: 4,
@@ -132,7 +132,8 @@ class WelcomeView extends GetView<WelcomeController> {
                   Get.offAndToNamed(AppRoutes.HOME);
               },
             ),
-          )
+          ),
+          _buildIndicator()
         ],
       );
     }
