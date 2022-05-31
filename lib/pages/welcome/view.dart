@@ -126,7 +126,7 @@ class WelcomeView extends GetView<WelcomeController> {
               child: const Text('开启旅程',style: TextStyle(
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
-                fontFamily: 'Montserrat',
+                fontFamily: 'SourceHanSans',
               ),),
               onPressed: () {
                   Get.offAndToNamed(AppRoutes.HOME);

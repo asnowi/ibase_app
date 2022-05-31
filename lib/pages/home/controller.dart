@@ -4,7 +4,7 @@ import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/pages/home/home.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with GetSingleTickerProviderStateMixin{
   final state = HomeState();
 
   @override

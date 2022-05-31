@@ -66,6 +66,8 @@ dependencies:
   fluttertoast: ^8.0.9
   # json 动画
   lottie: ^1.3.0
+  # flare 动画
+  flare_flutter: ^3.0.2
   # 事件通信
   event_bus: ^2.0.0
   # 本地序列化
@@ -80,6 +82,8 @@ dependencies:
   crypto: ^3.0.2
   # 指示器
   smooth_page_indicator: ^1.0.0+2
+  # 轮播图
+  flutter_swiper_plus: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -136,16 +140,21 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   fonts:
-    - family: Avenir
-      fonts:
-        - asset: assets/fonts/Avenir-Book.ttf
-          weight: 400 # normal
-    - family: Montserrat
-      fonts:
-        - asset: assets/fonts/Montserrat-Medium.ttf
-          weight: 500
-        - asset: assets/fonts/Montserrat-SemiBold.ttf
-          weight: 600
-    - family: Iconfont
+    - family: iconfont
       fonts:
         - asset: assets/fonts/iconfont.ttf
+    - family: FZDaLTJ
+      fonts:
+        - asset: assets/fonts/fzDaLTJ.ttf
+    - family: FZFWQingYinTiJWL
+      fonts:
+        - asset: assets/fonts/fzFWQingYinTiJWL.ttf
+    - family: FZFWZhuZiAYuanJWM
+      fonts:
+        - asset: assets/fonts/fzFWZhuZiAYuanJWM.ttf
+    - family: SourceHanSans
+      fonts:
+        - asset: assets/fonts/sourceHanSansMedium.ttc
+    - family: Rzzyt
+      fonts:
+        - asset: assets/fonts/rzzyt.ttf

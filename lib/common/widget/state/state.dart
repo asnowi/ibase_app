@@ -1,0 +1,5 @@
+enum PAGE_STATE{
+  LOADING,
+  EMPTY,
+  ERROR,
+}
