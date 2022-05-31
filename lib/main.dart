@@ -12,6 +12,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'common/app/app.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   await Global.init();
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
           maxOverScrollExtent: 100,
           footerTriggerDistance: 150,
           child: GetMaterialApp(
+            navigatorKey: navigatorKey,
             title: 'IBaseApp',
             debugShowCheckedModeBanner: false,
             theme: AppThemes.light,

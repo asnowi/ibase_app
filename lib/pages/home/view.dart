@@ -30,7 +30,7 @@ class HomeView extends GetView<HomeController> {
           //两次点击时间间隔超过1秒则重新计时
           _popTime = DateTime.now();
           // ToastUtils.showToast('再按一次退出');
-          Get.snackbar('', '再按一次退出');
+          ToastUtils.showBar('再按一次退出！');
           return false;
         }
         return true;

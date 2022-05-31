@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ibase_app/common/router/router.dart';
+import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/pages/welcome/welcome.dart';
 
 class WelcomeController extends GetxController{

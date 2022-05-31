@@ -13,3 +13,6 @@ export 'date.dart';
 export 'screen_utils.dart';
 export 'storage.dart';
 export 'toast.dart';
+
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:flutter/material.dart';
