@@ -10,6 +10,7 @@ class HomeView extends GetView<HomeController> {
 
   DateTime? _popTime;
 
+  final PageController _pageController = PageController(initialPage: 0,viewportFraction: 1, keepPage: true);
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +18,11 @@ class HomeView extends GetView<HomeController> {
       child: Scaffold(
         extendBody: false,
         resizeToAvoidBottomInset: false,
-        body: Center(
-            child: Container(
-              child: IconButton(onPressed: (){
-                ToastUtils.show('请登录！');
-              }, icon: Icon(Icons.eleven_mp)),
-            ),
+        body: Container(
+          color: Colors.white,
+          width: Get.width,
+          height: Get.height,
+          child: _buildPageView()
         ),
       ),
       onWillPop: () async {
@@ -36,6 +36,10 @@ class HomeView extends GetView<HomeController> {
         return true;
       },
     );
+  }
+
+  Widget _buildPageView() {
+    return PageView();
   }
 
 }

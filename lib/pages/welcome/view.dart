@@ -8,7 +8,7 @@ import 'welcome.dart';
 class WelcomeView extends GetView<WelcomeController> {
   WelcomeView({Key? key}) : super(key: key);
 
-  final pageController = PageController(initialPage: 0,viewportFraction: 1, keepPage: true);
+  final PageController _pageController = PageController(initialPage: 0,viewportFraction: 1, keepPage: true);
 
   List<Widget> _list(context) {
     return [
@@ -29,7 +29,7 @@ class WelcomeView extends GetView<WelcomeController> {
         child: PageView(
           scrollDirection: Axis.horizontal,
           reverse: false,
-          controller: pageController,
+          controller: _pageController,
           physics: const BouncingScrollPhysics(),
           pageSnapping: true,
           onPageChanged: (index) {
@@ -47,7 +47,7 @@ class WelcomeView extends GetView<WelcomeController> {
       alignment: Alignment.bottomCenter,
       margin: EdgeInsets.only(bottom: 60.h),
       child: SmoothPageIndicator(
-        controller: pageController,
+        controller: _pageController,
         count: 4,
         effect: const WormEffect(
             dotHeight: 6,

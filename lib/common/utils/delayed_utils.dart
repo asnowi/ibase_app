@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 //延时执行
-class DelayedUtil{
+class DelayedUtils{
 
   static delayed(VoidCallback voidCallback,{int milliseconds = 2000}){
     // 延时milliseconds执行返回

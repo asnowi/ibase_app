@@ -1,4 +1,4 @@
-class RegexUtil {
+class RegexUtils {
   ///校验手机号
   static isPhone(String? phone) {
     if (phone == null || phone.isEmpty) return false;
