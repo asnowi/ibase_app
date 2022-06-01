@@ -60,6 +60,8 @@ class HomeView extends GetView<HomeController> {
         id: 'navigator',
         builder: (controller) => PageView(
             physics: const NeverScrollableScrollPhysics(),
+            //横向滑动切换
+            scrollDirection: Axis.horizontal,
             controller: controller.pageController,
             children: _pageList,
             onPageChanged: (page) {

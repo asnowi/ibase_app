@@ -16,6 +16,9 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
   @override
   void onInit() {
     pageController = PageController(initialPage: currentIndex,viewportFraction: 1, keepPage: true);
+    pageController.addListener(() {
+      LogUtils.GGQ('------pageController---->>>${pageController.position}');
+    });
     super.onInit();
   }
 
@@ -35,7 +38,7 @@ class HomeController extends GetxController with GetSingleTickerProviderStateMix
 
   // 切换视图
   void onJumpToPage(int index) {
-    pageController.jumpToPage(index);
+     pageController.animateToPage(index, duration: const Duration(milliseconds: 50), curve: Curves.linear);
   }
 
 
