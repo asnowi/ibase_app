@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:ibase_app/pages/home/home.dart';
+import 'package:ibase_app/pages/home/nav/first/first.dart';
+import 'package:ibase_app/pages/home/nav/mine/mine.dart';
 import 'package:ibase_app/pages/login/login.dart';
 import 'package:ibase_app/pages/splash/splash.dart';
 import 'package:ibase_app/pages/unknown/unknown.dart';
@@ -47,11 +49,22 @@ class AppPages {
 
     /// 首页
     GetPage(
-      name: AppRoutes.HOME,
-      page: () => HomeView(),
-      binding: HomeBinding(),
-      transition: Transition.fadeIn,
-      // transitionDuration: _transitionDuration,
+        name: AppRoutes.HOME,
+        page: () => HomeView(),
+        binding: HomeBinding(),
+        bindings: [FirstBinding(),MineBinding()],
+        children: [
+          GetPage(
+              name: AppRoutes.HOME_FIRST,
+              page: () => FirstView(),
+              binding: FirstBinding()
+          ),
+          GetPage(
+              name: AppRoutes.HOME_MINE,
+              page: () => MineView(),
+              binding: MineBinding()
+          )
+        ]
     ),
   ];
 

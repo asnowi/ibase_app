@@ -10,7 +10,7 @@ export 'regex_utils.dart';
 export 'loading.dart';
 export 'security.dart';
 export 'date.dart';
-export 'screen_utils.dart';
+export 'screen.dart';
 export 'storage.dart';
 export 'toast.dart';
 export 'time_util.dart';

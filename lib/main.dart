@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: ScreenUtils.designSize(),
+      designSize: designSize(),
       builder: (BuildContext context, Widget? child) {
         return RefreshConfiguration(
           headerBuilder: () => const ClassicHeader(),

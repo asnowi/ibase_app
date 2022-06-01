@@ -6,7 +6,6 @@ extension ExString on String {
   Color get toColor {
     return Color(int.parse(this, radix: 16) | 0xFF000000);
   }
-
   /// 生成 MaterialColor
   Color get toMaterialColor {
     Color color = toColor;
