@@ -7,8 +7,11 @@ import 'mine.dart';
 class MineView extends GetView<MineController>{
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('mine'),
+    return Container(
+      color: Colors.greenAccent,
+      child: Center(
+        child: Text('我的'),
+      ),
     );
   }
 

@@ -14,9 +14,6 @@ class HomeView extends GetView<HomeController> {
 
   DateTime? _popTime;
 
-
-  final int _currentIndex = 0;
-
   final List<Widget> _pageList = [
     FirstView(),
     MineView(),
@@ -32,7 +29,6 @@ class HomeView extends GetView<HomeController> {
     AssetsProvider.imagePath('tab_mine'),
   ];
 
-  final PageController _pageController = PageController(initialPage: 0,viewportFraction: 1, keepPage: true);
 
   @override
   Widget build(BuildContext context) {
@@ -60,18 +56,22 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget _buildPageView() {
-    return PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: _pageList,
-        onPageChanged: (page) {
-          LogUtils.GGQ('page-->>>:${page}');
-        });
+    return GetBuilder<HomeController>(
+        id: 'navigator',
+        builder: (controller) => PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: controller.pageController,
+            children: _pageList,
+            onPageChanged: (page) {
+              LogUtils.GGQ('page-->>>:${page}');
+              controller.onChangePage(page);
+            })
+    );
   }
 
   BottomAppBar _buildBottomAppBar(BuildContext context) {
     // final itemWidth = CommonUtils.getWidth()/5;
-    final double itemWidth = Get.width / 2;
+    final double itemWidth = getWidth() / 2;
     return BottomAppBar(
       elevation: 6,
       notchMargin: 6.0,
@@ -79,8 +79,8 @@ class HomeView extends GetView<HomeController> {
       shape: const CustomCircularNotchedRectangle(),
       child: Row(
         children: [
-          SizedBox(height: 58, width: itemWidth, child: _buildItemBar(0)),
-          SizedBox(height: 58, width: itemWidth, child: _buildItemBar(1)),
+          SizedBox(height: 58.h, width: itemWidth, child: _buildItemBar(0)),
+          SizedBox(height: 58.h, width: itemWidth, child: _buildItemBar(1)),
         ],
       ),
     );
@@ -89,22 +89,24 @@ class HomeView extends GetView<HomeController> {
   Widget _buildItemBar(int index) {
     LogUtils.GGQ('---------->>${tabIcon[index]}');
     return MaterialButton(onPressed: (){
-
-    }, child: _buildItemBox(_currentIndex,index),
-        // splashColor: ThemeDataProvider.getThemeData().primaryColor,
+      controller.onJumpToPage(index);
+    },
         splashColor: Colors.blueGrey.shade100,
         highlightColor: Colors.blueGrey.shade50,
-        elevation: 0.0,
-        shape: const CircleBorder()
+        elevation: 1.2,
+        shape: const CircleBorder(),
+        child: _buildItemBox(index)
     );
   }
 
-  Widget _buildItemBox (int currentIndex,int index) {
+  Widget _buildItemBox (int index) {
     return Center(
-      child: Container(
-        child: (currentIndex == index)? Lottie.asset(tabLottie[index], width: 50, height: 50, repeat: false): Image.asset(tabIcon[index], width: 50, height: 50),
+      child: GetBuilder<HomeController>(
+        id: 'navigator',
+        builder: (controller) => Container(
+          child: (controller.currentIndex == index)? Lottie.asset(tabLottie[index], width: 52.w, height: 52.h, repeat: false): Image.asset(tabIcon[index], width: 52.w, height: 52.h),
+        ),
       ),
     );
   }
-
 }

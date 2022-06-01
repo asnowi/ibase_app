@@ -24,8 +24,8 @@ class WelcomeView extends GetView<WelcomeController> {
     return Scaffold(
       body: Container(
         color: Colors.white,
-        width: Get.width,
-        height: Get.height,
+        width: getWidth(),
+        height: getHeight(),
         child: PageView(
           scrollDirection: Axis.horizontal,
           reverse: false,
@@ -101,7 +101,7 @@ class WelcomeView extends GetView<WelcomeController> {
                 textStyle: MaterialStateProperty.all(TextStyle(
                   fontSize: 18.sp,
                 )),
-                minimumSize: MaterialStateProperty.all(Size(Get.width * 0.72, 54.h)),
+                minimumSize: MaterialStateProperty.all(Size(getWidth() * 0.72, 54.h)),
                 foregroundColor: MaterialStateProperty.resolveWith(
                       (states) {
                     if (states.contains(MaterialState.focused) &&

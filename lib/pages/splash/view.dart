@@ -12,8 +12,8 @@ class SplashView extends GetView<SplashController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: Get.width,
-        height: Get.height,
+        width:getWidth(),
+        height: getHeight(),
         color: Colors.white,
         child: Image.asset(AssetsProvider.imagePath('splash'),fit: BoxFit.fill)
       ),

@@ -8,8 +8,11 @@ class FirstView extends GetView<FirstController>{
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('first'),
+    return Container(
+      color: Colors.redAccent,
+      child: Center(
+        child: Text('社区'),
+      ),
     );
   }
 
