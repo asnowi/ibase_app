@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ibase_app/common/config/const.dart';
 
 import 'http.dart';
 
@@ -8,7 +9,7 @@ class DioTokenInterceptors extends Interceptor {
     if (options.headers['refreshToken'] == null) {
       DioUtil.getInstance()?.dio.lock();
       Dio _tokenDio = Dio();
-      _tokenDio..get("http://localhost:8080/getRefreshToken").then((d) {
+      _tokenDio..get(Global.BASE_URL + "/getRefreshToken").then((d) {
         options.headers['refreshToken'] = d;
         handler.next(options);
       }).catchError((error, stackTrace) {

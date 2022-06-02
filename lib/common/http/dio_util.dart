@@ -4,6 +4,7 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:ibase_app/common/config/config.dart';
 
 import 'http.dart';
 
@@ -14,7 +15,7 @@ class DioUtil {
   /// 响应超时时间
   static const int RECEIVE_TIMEOUT = 6 * 1000;
   /// 请求的URL前缀
-  static String BASE_URL = "http://localhost:8080";
+  static String BASE_URL = Global.BASE_URL;
   /// 是否开启网络缓存,默认false
   static bool CACHE_ENABLE = false;
   /// 最大缓存时间(按秒), 默认缓存七天,可自行调节

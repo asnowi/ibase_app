@@ -1,9 +1,5 @@
 class Global{
   static const String BASE_URL = 'http:192.168.50.249:8110';
-
-  static const String PROXY_URL = 'http:192.168.50.249:8110';
-
-  static const int HTTP_SUCCESS = 200;
 }
 
 class SaveInfoKey {

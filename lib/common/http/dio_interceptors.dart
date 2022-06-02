@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:ibase_app/common/config/config.dart';
+import 'package:ibase_app/common/utils/utils.dart';
 
 import 'http.dart';
 
@@ -13,7 +15,11 @@ class DioInterceptors extends Interceptor {
     }
 
     // 头部添加token
-    options.headers["token"] = "xxx";
+    final String? token = StorageUtil().getJSON(SaveInfoKey.TOKEN);
+    if(token != null && token.isNotEmpty) {
+      options.headers["token"] = token;
+    }
+
 
     // 更多业务需求
 
