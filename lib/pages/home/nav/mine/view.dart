@@ -7,14 +7,25 @@ import 'mine.dart';
 
 class MineView extends GetView<MineController>{
 
+  final LoadingButton _loadingButton = LoadingButton(text: '登录',onPressed: (){
+    // Get.toNamed(AppRoutes.LOGIN);
+    ToastUtils.show('msg');
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.greenAccent,
       child: Center(
-        child: LoadingButton(text: '登录',onPressed: (){
-          Get.toNamed(AppRoutes.LOGIN);
-        }),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _loadingButton,
+            TextButton(onPressed: (){
+              _loadingButton.onCancel();
+            }, child: Text('cancel'))
+          ],
+        )
       ),
     );
   }

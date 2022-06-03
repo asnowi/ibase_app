@@ -76,29 +76,33 @@ class _LoadingButtonState extends State<LoadingButton>{
               widget.isLoading = true;
             });
           },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Visibility(
-                visible: widget.isLoading,
-                maintainState: false,
-                child: SizedBox(
-                  width: 15,
-                  height: 15,
-                  child: SpinKitRing(
-                    color: widget.loadingColor ?? Colors.white60,
-                    size: 13.0,
-                    lineWidth: 1.0,
-                  ),
-                ),
-              ),
-              Visibility(
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 100),
+            child: Row(
+              key: ValueKey<bool>(widget.isLoading),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Visibility(
                   visible: widget.isLoading,
                   maintainState: false,
-                  child: const Padding(padding: EdgeInsets.only(right: 6))),
-              Text(widget.isLoading ? widget.loadingText ?? '请稍后...' : widget.text,
-                  style: widget.textStyle),
-            ],
+                  child: SizedBox(
+                    width: 15,
+                    height: 15,
+                    child: SpinKitRing(
+                      color: widget.loadingColor ?? Colors.white60,
+                      size: 13.0,
+                      lineWidth: 1.0,
+                    ),
+                  ),
+                ),
+                Visibility(
+                    visible: widget.isLoading,
+                    maintainState: false,
+                    child: const Padding(padding: EdgeInsets.only(right: 6))),
+                Text(widget.isLoading ? widget.loadingText ?? '请稍后...' : widget.text,
+                    style: widget.textStyle),
+              ],
+            ),
           ),
         ));
   }
