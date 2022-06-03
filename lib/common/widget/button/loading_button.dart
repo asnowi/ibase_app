@@ -107,12 +107,6 @@ class _LoadingButtonState extends State<LoadingButton>{
         ));
   }
 
-  @override
-  void dispose() {
-    reset();
-    super.dispose();
-  }
-
   void reset(){
     setState(() {
       widget.isLoading = false;

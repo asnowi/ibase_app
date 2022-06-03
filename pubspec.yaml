@@ -86,6 +86,8 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   # 轮播图
   flutter_swiper_plus: ^2.0.4
+  # 视频播放器
+  video_player: ^2.4.2
 
 dev_dependencies:
   flutter_test:
@@ -116,6 +118,7 @@ flutter:
   assets:
     - assets/images/
     - assets/json/
+    - assets/video/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
