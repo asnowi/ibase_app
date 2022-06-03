@@ -58,7 +58,7 @@ class HomeView extends GetView<HomeController> {
   Widget _buildPageView() {
     return GetBuilder<HomeController>(
         id: 'navigator',
-        builder: (controller) => PageView(
+        builder: (_) => PageView(
             physics: const NeverScrollableScrollPhysics(),
             //横向滑动切换
             scrollDirection: Axis.horizontal,
@@ -105,7 +105,7 @@ class HomeView extends GetView<HomeController> {
     return Center(
       child: GetBuilder<HomeController>(
         id: 'navigator',
-        builder: (controller) => Container(
+        builder: (_) => Container(
           child: (controller.currentIndex == index)? Lottie.asset(tabLottie[index], width: 52.w, height: 52.h, repeat: false): Image.asset(tabIcon[index], width: 52.w, height: 52.h),
         ),
       ),

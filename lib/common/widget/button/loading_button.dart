@@ -11,6 +11,10 @@ class LoadingButton extends StatefulWidget{
   Color? loadingColor;
   ButtonStyle? buttonStyle;
 
+  bool isLoading = false;
+
+  _LoadingButtonState? _state;
+
   LoadingButton(
       {Key? key,
       required this.text,
@@ -24,11 +28,17 @@ class LoadingButton extends StatefulWidget{
       : super(key: key);
 
   @override
-  State<LoadingButton> createState() => _LoadingButtonState();
+  State<LoadingButton> createState() {
+    _state = _LoadingButtonState();
+    return _state!;
+  }
+
+  void onCancel(){
+    _state?.reset();
+  }
 }
 
 class _LoadingButtonState extends State<LoadingButton>{
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,16 +69,18 @@ class _LoadingButtonState extends State<LoadingButton>{
             )),
           ),
           onPressed: () {
-            widget.onPressed();
+            if(!widget.isLoading) {
+              widget.onPressed();
+            }
             setState(() {
-              isLoading = true;
+              widget.isLoading = true;
             });
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Visibility(
-                visible: isLoading,
+                visible: widget.isLoading,
                 maintainState: false,
                 child: SizedBox(
                   width: 15,
@@ -81,10 +93,10 @@ class _LoadingButtonState extends State<LoadingButton>{
                 ),
               ),
               Visibility(
-                  visible: isLoading,
+                  visible: widget.isLoading,
                   maintainState: false,
                   child: const Padding(padding: EdgeInsets.only(right: 6))),
-              Text(isLoading ? widget.loadingText ?? '请稍后...' : widget.text,
+              Text(widget.isLoading ? widget.loadingText ?? '请稍后...' : widget.text,
                   style: widget.textStyle),
             ],
           ),
@@ -93,9 +105,13 @@ class _LoadingButtonState extends State<LoadingButton>{
 
   @override
   void dispose() {
-    setState(() {
-      isLoading = false;
-    });
+    reset();
     super.dispose();
+  }
+
+  void reset(){
+    setState(() {
+      widget.isLoading = false;
+    });
   }
 }

@@ -2,12 +2,8 @@ import 'package:get/get.dart';
 import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
-import 'package:ibase_app/pages/splash/splash.dart';
-
 
 class SplashController extends GetxController {
-
-  final state = SplashState();
 
   @override
   void onInit() {
