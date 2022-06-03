@@ -6,7 +6,7 @@ import 'package:ibase_app/common/widget/button/loading_button.dart';
 class MineController extends GetxController with WidgetsBindingObserver{
 
 
-  final LoadingButton loadingButton = LoadingButton(text: '登录',onPressed: (){
+  final LoadingButton loadingButton = LoadingButton(text: '登录',onPressed: (BuildContext context){
     Get.toNamed(AppRoutes.LOGIN);
   });
 

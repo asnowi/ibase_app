@@ -10,7 +10,6 @@ class LoadingButton extends StatefulWidget{
   double? height;
   Color? loadingColor;
   ButtonStyle? buttonStyle;
-
   bool isLoading = false;
 
   _LoadingButtonState? _state;
@@ -24,8 +23,10 @@ class LoadingButton extends StatefulWidget{
       this.width,
       this.height,
       this.loadingColor,
-      this.buttonStyle})
+      this.buttonStyle,
+      })
       : super(key: key);
+
 
   @override
   State<LoadingButton> createState() {
@@ -35,6 +36,10 @@ class LoadingButton extends StatefulWidget{
 
   void onCancel(){
     _state?.reset();
+  }
+
+  void onLoading(){
+    _state?.loading();
   }
 }
 
@@ -70,11 +75,8 @@ class _LoadingButtonState extends State<LoadingButton>{
           ),
           onPressed: () {
             if(!widget.isLoading) {
-              widget.onPressed();
+              widget.onPressed(context);
             }
-            setState(() {
-              widget.isLoading = true;
-            });
           },
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 100),
@@ -105,6 +107,12 @@ class _LoadingButtonState extends State<LoadingButton>{
             ),
           ),
         ));
+  }
+
+  void loading(){
+    setState(() {
+      widget.isLoading = true;
+    });
   }
 
   void reset(){

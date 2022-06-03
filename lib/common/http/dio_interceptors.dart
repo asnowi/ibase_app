@@ -33,9 +33,9 @@ class DioInterceptors extends Interceptor {
 
     // 请求成功是对数据做基本处理
     if (response.statusCode == 200) {
-      response.data = DioResponse(code: DioResponseCode.SUCCESS, message: "操作成功~!", data: response.data);
+      response.data = DioResponse(errorCode: DioResponseCode.SUCCESS, errorMsg: "操作成功~!", data: response.data);
     } else {
-      response.data = DioResponse(code: DioResponseCode.ERROR, message: "操作失败~!", data: response.data);
+      response.data = DioResponse(errorCode: DioResponseCode.ERROR, errorMsg: "操作失败~!", data: response.data);
     }
 
     // 对某些单独的url返回数据做特殊处理

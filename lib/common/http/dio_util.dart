@@ -120,6 +120,8 @@ class DioUtil {
     Options? options,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    Function? onBefore,
+    Function? onComplete,
   }) async {
     const _methodValues = {
       DioMethod.get: 'get',
@@ -130,9 +132,9 @@ class DioUtil {
       DioMethod.head: 'head'
     };
 
-
     options ??= Options(method: _methodValues[method]);
     try {
+      onBefore?.call();
       Response response;
       response = await _dio.request(path,
           data: data,
@@ -145,6 +147,8 @@ class DioUtil {
       return response.data;
     } on DioError catch (e) {
       throw e;
+    } finally {
+      onComplete?.call();
     }
   }
 
@@ -153,3 +157,7 @@ class DioUtil {
     token ?? _cancelToken.cancel("cancelled");
   }
 }
+
+
+typedef onBefore = void Function();
+typedef onComplete = void Function();

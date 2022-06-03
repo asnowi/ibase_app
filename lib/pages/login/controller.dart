@@ -1,18 +1,9 @@
 import 'package:get/get.dart';
-import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
 import 'package:video_player/video_player.dart';
 
 class LoginController extends GetxController{
-
-  final LoadingButton loadingButton = LoadingButton(text: '登录', width: 0.82.sw,height: 48.h,textStyle: TextStyle(fontSize: 16.sp,color: Colors.white,fontWeight: FontWeight.normal,fontFamily: 'FZDaLTJ'),onPressed: (){
-    Get.toNamed(AppRoutes.LOGIN);
-  });
-
-  void onLoadCancel() {
-    loadingButton.onCancel();
-  }
 
 
   // 声明视频控制器
@@ -22,10 +13,34 @@ class LoginController extends GetxController{
   final TextEditingController passwordController = TextEditingController();
 
 
+   late LoadingButton loadingButton;
+
+  void onLoadCancel() {
+    loadingButton.onCancel();
+  }
+
+
   @override
   void onInit() {
     // videoPlayerController = VideoPlayerController.network(AppConfig.VIDEO_URL);
     videoPlayerController = VideoPlayerController.asset(AssetsProvider.loadVideo('video-login-hd'));
+    loadingButton = LoadingButton(text: '登录', width: 0.82.sw,height: 48.h,textStyle: TextStyle(fontSize: 16.sp,color: Colors.white,fontWeight: FontWeight.normal,fontFamily: 'FZDaLTJ'),onPressed: (BuildContext context){
+      final String account = accountController.text;
+      if(account.isEmpty) {
+        ToastUtils.show('请输入账号!');
+        return;
+      }
+      final String password = passwordController.text;
+      if(password.isEmpty) {
+        ToastUtils.show('请输入密码!');
+        return;
+      }
+      loadingButton.onLoading();
+
+      LogUtils.GGQ('--账号:--->${account}');
+      LogUtils.GGQ('--密码:--->${password}');
+      FocusScope.of(context).unfocus();
+    });
     super.onInit();
   }
 
