@@ -5,6 +5,7 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:ibase_app/common/config/config.dart';
+import 'package:ibase_app/common/utils/logger.dart';
 
 import 'http.dart';
 
@@ -120,8 +121,6 @@ class DioUtil {
     Options? options,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
-    Function? onBefore,
-    Function? onComplete,
   }) async {
     const _methodValues = {
       DioMethod.get: 'get',
@@ -134,7 +133,6 @@ class DioUtil {
 
     options ??= Options(method: _methodValues[method]);
     try {
-      onBefore?.call();
       Response response;
       response = await _dio.request(path,
           data: data,
@@ -148,7 +146,7 @@ class DioUtil {
     } on DioError catch (e) {
       throw e;
     } finally {
-      onComplete?.call();
+      LogUtils.GGQ('----finally-----');
     }
   }
 

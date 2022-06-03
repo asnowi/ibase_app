@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ibase_app/common/db/db_util.dart';
+import 'package:ibase_app/common/http/http.dart';
 import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 
@@ -30,6 +31,7 @@ class Global{
      await DBUtil.install();
      dbUtil = await DBUtil.getInstance();
      await StorageUtil().init();
+     DioUtil.getInstance()?..openLog()..setHttpsCertificateVerification(enable: true);
     // 业务服务
     Get.put<ConfigService>(ConfigService());
   }

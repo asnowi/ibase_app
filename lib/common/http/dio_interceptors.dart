@@ -21,8 +21,9 @@ class DioInterceptors extends Interceptor {
     }
 
 
+    LogUtils.GGQ('path->${options.path}');
+    LogUtils.GGQ('uri->${options.uri}');
     // 更多业务需求
-
     handler.next(options);
 
     // super.onRequest(options, handler);
@@ -30,12 +31,21 @@ class DioInterceptors extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) async {
-
+    LogUtils.GGQ('response->${response.toString()}');
     // 请求成功是对数据做基本处理
     if (response.statusCode == 200) {
-      response.data = DioResponse(errorCode: DioResponseCode.SUCCESS, errorMsg: "操作成功~!", data: response.data);
+      // response.data = DioResponse(errorCode: DioResponseCode.SUCCESS, errorMsg: "操作成功~!", data: response.data);
+      final body = response.data;
+      if(body == null) {
+        response.data = DioResponse(errorCode: DioResponseCode.ERROR, errorMsg: "操作失败~!");
+      } else {
+        final errorCode = body['errorCode'];
+        final errorMsg = body['errorMsg'];
+        final data = body['data'];
+        response.data = DioResponse(errorCode: errorCode, errorMsg: errorMsg,data: data);
+      }
     } else {
-      response.data = DioResponse(errorCode: DioResponseCode.ERROR, errorMsg: "操作失败~!", data: response.data);
+      response.data = DioResponse(errorCode: DioResponseCode.ERROR, errorMsg: "操作失败~!");
     }
 
     // 对某些单独的url返回数据做特殊处理
@@ -46,6 +56,7 @@ class DioInterceptors extends Interceptor {
     // 根据公司的业务需求进行定制化处理
 
     // 重点
+    LogUtils.GGQ('===============>>>>${response.toString()}');
     handler.next(response);
   }
 
