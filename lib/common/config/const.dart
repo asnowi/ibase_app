@@ -1,4 +1,4 @@
-class Global{
+class GlobalConfig{
   static const String BASE_URL = 'https://www.wanandroid.com';
 }
 

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ibase_app/common/db/db.dart';
 import 'package:ibase_app/common/db/db_util.dart';
 import 'package:ibase_app/common/http/http.dart';
 import 'package:ibase_app/common/service/service.dart';
@@ -19,6 +20,8 @@ class Global{
   static bool isAndroid = Platform.isAndroid;
 
   static DBUtil? dbUtil;
+
+  static User? user;
 
   static Future<void> init() async {
      // 运行初始

@@ -1,10 +1,16 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
+import 'package:ibase_app/common/app/app.dart';
+import 'package:ibase_app/common/config/config.dart';
+import 'package:ibase_app/common/db/db.dart';
 import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
 
 class MineController extends GetxController with WidgetsBindingObserver{
 
+  User? user;
 
   final LoadingButton loadingButton = LoadingButton(text: '登录',onPressed: (BuildContext context){
     Get.toNamed(AppRoutes.LOGIN);
@@ -15,13 +21,30 @@ class MineController extends GetxController with WidgetsBindingObserver{
     loadingButton.onCancel();
   }
 
+  StreamSubscription<CommonEvent>? _subscription;
+
 
   @override
   void onInit() {
     WidgetsBinding.instance.addObserver(this);
+    _subscription = EventBusUtils.listen((event) {
+      LogUtils.GGQ('event:${event.code}');
+      user = Global.user;
+      if(event.code == EventCode.EVENT_LOGIN){
+        update(['user']);
+      }
+    });
     super.onInit();
   }
 
+  @override
+  void onReady() {
+    if(Global.user != null) {
+      user = Global.user;
+      update(['user']);
+    }
+    super.onReady();
+  }
 
   @override
   void disposeId(Object id) {
@@ -43,5 +66,13 @@ class MineController extends GetxController with WidgetsBindingObserver{
       LogUtils.GGQ('没有宿主视图但是flutter引擎仍然有效');
     }
     super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    if(_subscription != null){
+      _subscription?.cancel();
+    }
+    super.dispose();
   }
 }

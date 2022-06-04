@@ -20,6 +20,7 @@ class ToastUtils {
 
   static void showBar(String? msg){
     if(msg != null && msg.isNotEmpty) {
+      Get.closeAllSnackbars();
       Get.snackbar('', msg);
     }
   }

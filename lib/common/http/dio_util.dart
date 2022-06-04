@@ -16,7 +16,7 @@ class DioUtil {
   /// 响应超时时间
   static const int RECEIVE_TIMEOUT = 6 * 1000;
   /// 请求的URL前缀
-  static String BASE_URL = Global.BASE_URL;
+  static String BASE_URL = GlobalConfig.BASE_URL;
   /// 是否开启网络缓存,默认false
   static bool CACHE_ENABLE = false;
   /// 最大缓存时间(按秒), 默认缓存七天,可自行调节

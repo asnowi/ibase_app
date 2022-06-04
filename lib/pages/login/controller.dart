@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ibase_app/common/api/api.dart';
 import 'package:ibase_app/common/app/app.dart';
+import 'package:ibase_app/common/config/config.dart';
 import 'package:ibase_app/common/db/db.dart';
 import 'package:ibase_app/common/entity/entity.dart';
 import 'package:ibase_app/common/utils/utils.dart';
@@ -54,15 +55,17 @@ class LoginController extends GetxController{
         LogUtils.GGQ('------登录结果:------>>>${value}');
         if(ResponseUtils.isSuccess(value.errorCode)) {
             final entity = LoginEntity.fromJson(value.data);
-            final User user = User()
-              ..userId = entity.id?.toString()
-              ..token = entity.token
-              ..nickname = entity.nickname
-              ..phone = entity.username
-              ..avatarImg = entity.icon;
+            final User user = User();
+            user.userId = entity.id?.toString();
+            user.token = entity.token;
+            user.username = entity.username;
+            user.phone = entity.username;
+            user.avatarImg = 'http://p1.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg';
 
             final int? result = await Global.dbUtil?.saveUser(user);
             if(result != null && result >= 0) {
+              Global.user = Global.dbUtil?.getUser();
+              EventBusUtils.send<CommonEvent>(CommonEvent(EventCode.EVENT_LOGIN));
               Get.back();
             } else {
               ToastUtils.showBar('保存用户信息失败！');

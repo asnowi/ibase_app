@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 import 'dart:io';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ibase_app/common/app/app.dart';
+import 'package:ibase_app/common/utils/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'db.dart';
@@ -37,6 +38,7 @@ class DBUtil{
 
   //---------用户信息----------------
   Future<int?> saveUser(User user) async{
+    LogUtils.GGQ('------saveUser------>>>${user.toString()}');
     return Global.dbUtil?.userBox.add(user);
   }
 

@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:event_bus/event_bus.dart';
 
 class EventBusUtils {
-  static late EventBus _eventBus;
+  static EventBus? _eventBus;
 
   //获取单例
   static EventBus _getInstance() {
     if(_eventBus == null) {
       _eventBus = EventBus();
     }
-    return _eventBus;
+    return _eventBus!;
   }
 
   //发送事件
