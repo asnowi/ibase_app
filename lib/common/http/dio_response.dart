@@ -1,12 +1,12 @@
 
-class DioResponse<T> {
+class DioResponse<Object> {
 
   /// 消息(例如成功消息文字/错误消息文字)
   final String? errorMsg;
   /// 自定义code(可根据内部定义方式)
   final int? errorCode;
   /// 接口返回的数据
-  final T? data;
+  final Object? data;
   /// 需要添加更多
   /// .........
   DioResponse({
@@ -15,12 +15,13 @@ class DioResponse<T> {
     this.errorCode,
   });
 
+
   @override
   String toString() {
     StringBuffer sb = StringBuffer('{');
     sb.write("\"errorMsg\":\"$errorMsg\"");
     sb.write(",\"errorCode\":\"$errorCode\"");
-    sb.write(",\"data\":\"$data\"");
+    sb.write(",\"data\":\"${data.toString()}\"");
     sb.write('}');
     return sb.toString();
   }

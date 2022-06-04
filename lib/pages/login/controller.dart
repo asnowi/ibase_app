@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:ibase_app/common/api/api.dart';
+import 'package:ibase_app/common/app/app.dart';
+import 'package:ibase_app/common/db/db.dart';
 import 'package:ibase_app/common/entity/entity.dart';
 import 'package:ibase_app/common/http/dio_response.dart';
 import 'package:ibase_app/common/utils/utils.dart';
@@ -43,8 +45,26 @@ class LoginController extends GetxController{
       LogUtils.GGQ('--密码:--->${password}');
       FocusScope.of(context).unfocus();
 
-      ApiService.login(account, password).then((value) => {
-        
+      ApiService.login(account, password).then((value) async{
+        LogUtils.GGQ('------登录结果:------>>>${value}');
+        if(ResponseUtils.isSuccess(value.errorCode)) {
+            final entity = LoginEntity.fromJson(value.data);
+            final User user = User()
+              ..userId = entity.id?.toString()
+              ..token = entity.token
+              ..nickname = entity.nickname
+              ..phone = entity.username
+              ..avatarImg = entity.icon;
+
+            final int? result = await Global.dbUtil?.saveUser(user);
+            if(result != null && result >= 0) {
+              Get.back();
+            } else {
+              ToastUtils.showBar('保存用户信息失败！');
+            }
+        } else {
+          ToastUtils.showBar(ResponseUtils.getError(value.errorMsg));
+        }
       }).whenComplete(() => {
         loadingButton.onCancel()
       });
