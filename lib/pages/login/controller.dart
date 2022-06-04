@@ -3,7 +3,6 @@ import 'package:ibase_app/common/api/api.dart';
 import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/db/db.dart';
 import 'package:ibase_app/common/entity/entity.dart';
-import 'package:ibase_app/common/http/dio_response.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
 import 'package:video_player/video_player.dart';
@@ -40,6 +39,12 @@ class LoginController extends GetxController{
         ToastUtils.show('请输入密码!');
         return;
       }
+
+      if(!isAgree){
+        ToastUtils.show('请阅读并同意用户使用协议和隐私条款!');
+        return;
+      }
+
       loadingButton.onLoading();
       LogUtils.GGQ('--账号:--->${account}');
       LogUtils.GGQ('--密码:--->${password}');

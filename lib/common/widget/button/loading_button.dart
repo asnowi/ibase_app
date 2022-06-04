@@ -67,7 +67,7 @@ class _LoadingButtonState extends State<LoadingButton>{
               if (states.contains(MaterialState.pressed)) {
                 return Colors.redAccent[100];
               }
-              return Colors.redAccent[100];
+              return widget.isLoading? Colors.pink[100] : Colors.redAccent[100];
             }),
             shape: MaterialStateProperty.all(const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(4)),

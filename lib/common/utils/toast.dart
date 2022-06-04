@@ -11,7 +11,7 @@ class ToastUtils {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.SNACKBAR,
           timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.black54,
           textColor: Colors.white,
           fontSize: 14.0
       );
