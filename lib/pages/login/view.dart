@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/values/values.dart';
+import 'package:ibase_app/common/widget/dialog/tip_dialog.dart';
 import 'package:lottie/lottie.dart';
 import 'package:video_player/video_player.dart';
 
@@ -19,7 +20,7 @@ class LoginView extends GetView<LoginController> {
           alignment: Alignment.center,
           children: [
             _buildPlayer(context),
-            _buildAction(),
+            _buildAction(context),
             _buildContent(),
             _buildAgreement()
           ],
@@ -52,7 +53,7 @@ class LoginView extends GetView<LoginController> {
     );
   }
 
-  Widget _buildAction() {
+  Widget _buildAction(BuildContext context) {
     return Positioned(
         top: 20.h,
         child: SizedBox(
@@ -296,7 +297,8 @@ class LoginView extends GetView<LoginController> {
             child: Text('立即注册',style: TextStyle(fontSize: 14.sp,color: Colors.white,fontFamily: 'FZDaLTJ')),
           ),
           MaterialButton(
-            onPressed: (){},
+            onPressed: (){
+            },
             child: Text('忘记密码?',style: TextStyle(fontSize: 14.sp,color: Colors.white,fontFamily: 'FZDaLTJ')),
           ),
         ],

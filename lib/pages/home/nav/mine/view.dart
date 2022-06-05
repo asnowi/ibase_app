@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/utils/utils.dart';
+import 'package:ibase_app/common/widget/dialog/tip_dialog.dart';
 import 'package:ibase_app/common/widget/text/icon_text.dart';
 
 import 'mine.dart';
@@ -167,7 +168,8 @@ class MineView extends GetView<MineController> {
                 },),
                 Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
                 IconText(txt: '版本',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){
-                  ToastUtils.show('版本');
+                 // ToastUtils.show('版本');
+                  TipDialog.show(context);
                 },),
                 const Padding(padding: EdgeInsets.only(top: 50)),
                 FractionallySizedBox(
