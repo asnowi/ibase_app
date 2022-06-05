@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/text/icon_text.dart';
@@ -10,13 +12,6 @@ class MineView extends GetView<MineController> {
 
   @override
   Widget build(BuildContext context) {
-    // return NestedScrollView(
-    //   headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
-    //     return _buildHeader(context,innerBoxIsScrolled);
-    //   },
-    //   body: _buildContent(context),
-    // );
-
     return Scaffold(
       body: NestedScrollView(
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
@@ -43,7 +38,7 @@ class MineView extends GetView<MineController> {
                   alignment: Alignment.centerLeft,
                   child: GetBuilder<MineController>(
                       id: 'user',
-                      builder: (_) => controller.user == null? _buildUnLogin(): _buildLogined()
+                      builder: (_) => controller.isHiveUser()? _buildLogined():_buildUnLogin()
                   ),
                 );
               })
@@ -68,12 +63,12 @@ class MineView extends GetView<MineController> {
           padding: EdgeInsets.only(left: 5.w),
           child: TextButton(
             onPressed: (){
-              Get.toNamed(AppRoutes.LOGIN);
+              _openLogin();
             },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.redAccent[100])
             ),
-            child: Text('请先登录',style: TextStyle(fontSize: 14.sp,color: Colors.white),),
+            child: Text('请登录',style: TextStyle(fontSize: 14.sp,color: Colors.white),),
           ),
         )
       ],
@@ -89,7 +84,7 @@ class MineView extends GetView<MineController> {
           ClipOval(
             child: ConstrainedBox(
               constraints: BoxConstraints.loose(const Size(72,72)),
-              child: (controller.user != null && controller.user?.avatarImg != null)? ImageLoader.load(url: controller.user!.avatarImg!): Image.asset(AssetsProvider.imagePath('img_avatar_default')),
+              child: (controller.user?.avatarImg != null)? ImageLoader.load(url: controller.user!.avatarImg!): Image.asset(AssetsProvider.imagePath('img_avatar_default')),
             ) ,
           ),
           const Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
@@ -99,8 +94,8 @@ class MineView extends GetView<MineController> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text((controller.user != null && controller.user?.phone != null)? controller.user!.phone!:'',overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 16,color: Colors.white,fontFamily: 'FZDaLTJ',fontWeight: FontWeight.bold),),
-                Text((controller.user != null && controller.user?.avatarImg != null)? controller.user!.avatarImg!:'',overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,color: Colors.white60),),
+                Text((controller.user?.phone != null)? controller.user!.phone!:'',overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 16,color: Colors.white,fontFamily: 'FZDaLTJ',fontWeight: FontWeight.bold),),
+                Text((controller.user?.avatarImg != null)? controller.user!.avatarImg!:'',overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,color: Colors.white60),),
               ],
             ),
           )
@@ -156,11 +151,19 @@ class MineView extends GetView<MineController> {
             child: Column(
               children: [
                 IconText(txt: '我的位置',icon: const Icon(Iconfont.location,size: 14,color: Colors.black54),onClick: (){
-                  ToastUtils.show('我的位置');
+                  if(controller.isHiveUser()) {
+                    ToastUtils.show('我的收藏');
+                  } else {
+                    _openLogin();
+                  }
                 },),
                 Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
                 IconText(txt: '我的收藏',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){
-                  ToastUtils.show('我的收藏');
+                  if(controller.isHiveUser()) {
+                    ToastUtils.show('我的收藏');
+                  } else {
+                    _openLogin();
+                  }
                 },),
                 Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
                 IconText(txt: '版本',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){
@@ -170,13 +173,21 @@ class MineView extends GetView<MineController> {
                 FractionallySizedBox(
                   widthFactor: 0.9,
                   child: ElevatedButton(onPressed: (){
-                    //  退出登录
-                    ToastUtils.show('退出登录');
+                    if(controller.isHiveUser()) {
+                      //  退出登录
+                      _showLogout(context);
+                    } else {
+                      _openLogin();
+                    }
                   },
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all(Size(getWidth() * 0.72, 46.h)),
                         backgroundColor: MaterialStateProperty.all(Colors.redAccent)
-                    ), child: const Text('退出登录',style: TextStyle(color: Colors.white,fontSize: 14),),),
+                    ), child: GetBuilder<MineController>(
+                        id: 'user',
+                        builder: (_) => Text(controller.isHiveUser()? '退出登录': '请登录',style: const TextStyle(color: Colors.white,fontSize: 14),),
+                      )
+                  ),
                 )
               ],
             ),
@@ -184,5 +195,51 @@ class MineView extends GetView<MineController> {
         ],
       ),
     );
+  }
+
+
+  void _showLogout(BuildContext context) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return Theme(data: ThemeData.light(), child: CupertinoAlertDialog(
+            insetAnimationDuration: const Duration(seconds: 2),
+            title: const Text('温馨提示', style: TextStyle(fontSize: 14),),
+            content: const Text('您确定要退出账号？', style: TextStyle(fontSize: 14)),
+            actions: [
+              CupertinoDialogAction(child: const Text(
+                  '确定', style: TextStyle(fontSize: 12, color: Colors.blue)),
+                onPressed: () async {
+                  // int value = await Global.dbUtil.userBox.clear();
+                  // Global.userInfo = null;
+                  //
+                  // LogUtils.GGQ('删除用户：${value}');
+                  // Navigator.of(context).pop();
+                  // //发送事件
+                  // final event = CommonEvent(EventCode.EVENT_LOGIN,message: value.toString());
+                  // EventBusUtils.send(event);
+
+                  bool? result = await Global.dbUtil?.clearUser();
+                  if(result != null && result) {
+                    controller.clearUser();
+                    Navigator.of(context).pop();
+                  } else {
+                    ToastUtils.show('退出失败!');
+                  }
+                },),
+              CupertinoDialogAction(child: const Text(
+                  '取消', style: TextStyle(fontSize: 12, color: Colors.blue)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ));
+        }
+    );
+  }
+
+  void _openLogin() {
+    Get.toNamed(AppRoutes.LOGIN);
   }
 }

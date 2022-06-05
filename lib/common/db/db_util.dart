@@ -49,4 +49,13 @@ class DBUtil{
     }
     return null;
   }
+
+  Future<bool> clearUser() async{
+    int? result = await Global.dbUtil?.userBox.clear();
+    LogUtils.GGQ('---clearUser-->${result}');
+    if(result != null && result >= 0) {
+      return true;
+    }
+    return false;
+  }
 }

@@ -12,6 +12,16 @@ class MineController extends GetxController with WidgetsBindingObserver{
 
   User? user;
 
+  bool isHiveUser(){
+    return user != null;
+  }
+
+  void clearUser(){
+    Global.user = null;
+    user = null;
+    update(['user']);
+  }
+
   final LoadingButton loadingButton = LoadingButton(text: '登录',onPressed: (BuildContext context){
     Get.toNamed(AppRoutes.LOGIN);
   });
