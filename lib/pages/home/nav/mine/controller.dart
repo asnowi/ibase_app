@@ -56,11 +56,6 @@ class MineController extends GetxController with WidgetsBindingObserver{
     super.onReady();
   }
 
-  @override
-  void disposeId(Object id) {
-    WidgetsBinding.instance.removeObserver(this);
-    super.disposeId(id);
-  }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -83,6 +78,7 @@ class MineController extends GetxController with WidgetsBindingObserver{
     if(_subscription != null){
       _subscription?.cancel();
     }
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 }

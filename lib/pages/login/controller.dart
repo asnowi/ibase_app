@@ -8,7 +8,7 @@ import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
 import 'package:video_player/video_player.dart';
 
-class LoginController extends GetxController{
+class LoginController extends GetxController with WidgetsBindingObserver{
 
 
   // 声明视频控制器
@@ -27,6 +27,7 @@ class LoginController extends GetxController{
 
   @override
   void onInit() {
+    WidgetsBinding.instance.addObserver(this);
     // videoPlayerController = VideoPlayerController.network(AppConfig.VIDEO_URL);
     videoPlayerController = VideoPlayerController.asset(AssetsProvider.loadVideo('video-login-hd'));
     loadingButton = LoadingButton(text: '登录', width: 0.82.sw,height: 48.h,textStyle: TextStyle(fontSize: 16.sp,color: Colors.white,fontWeight: FontWeight.normal,fontFamily: 'FZDaLTJ'),onPressed: (BuildContext context) {
@@ -122,8 +123,23 @@ class LoginController extends GetxController{
     update(['agree']);
   }
 
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    LogUtils.GGQ('--GetxController 生命周期:--${state}');
+    if (state == AppLifecycleState.resumed) {
+      LogUtils.GGQ('app进入前台');
+      videoPlayerController.play();
+    } else if (state == AppLifecycleState.paused) {
+      LogUtils.GGQ('app进入后台');
+      videoPlayerController.pause();
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     videoPlayerController.dispose();
     super.dispose();
   }

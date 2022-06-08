@@ -5,6 +5,7 @@ import 'package:ibase_app/pages/home/home.dart';
 import 'package:ibase_app/pages/home/nav/first/first.dart';
 import 'package:ibase_app/pages/home/nav/mine/mine.dart';
 import 'package:ibase_app/pages/login/login.dart';
+import 'package:ibase_app/pages/setting/setting.dart';
 import 'package:ibase_app/pages/splash/splash.dart';
 import 'package:ibase_app/pages/unknown/unknown.dart';
 import 'package:ibase_app/pages/welcome/welcome.dart';
@@ -65,6 +66,13 @@ class AppPages {
               binding: MineBinding()
           )
         ]
+    ),
+
+    /// 设置页
+    GetPage(
+        name: AppRoutes.SETTING,
+        page: () => SettingView(),
+        binding: SettingBinding(),
     ),
   ];
 

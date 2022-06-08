@@ -43,16 +43,12 @@ class MyApp extends StatelessWidget {
             getPages: AppPages.routes,
             unknownRoute: AppPages.unknownPage(),
             builder: EasyLoading.init(),
-            translations: TranslationService(),
             navigatorObservers: [AppPages.observer],
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
+            translations: TranslationService(),
             supportedLocales: ConfigService.to.languages,
             locale: ConfigService.to.locale,
             fallbackLocale: TranslationService.fallbackLocale,
+            localizationsDelegates: TranslationService.localizationsDelegates,
             // 日志
             enableLog: true,
             logWriterCallback: LogUtils.write,

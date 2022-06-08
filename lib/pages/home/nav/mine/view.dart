@@ -167,9 +167,16 @@ class MineView extends GetView<MineController> {
                   }
                 },),
                 Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
+                IconText(txt: '设置',icon: const Icon(Iconfont.carUp,size: 14,color: Colors.black54),onClick: (){
+                  if(controller.isHiveUser()) {
+                    _openSetting();
+                  } else {
+                    _openLogin();
+                  }
+                },),
+                Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
                 IconText(txt: '版本',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){
-                 // ToastUtils.show('版本');
-                  TipDialog.show(context);
+                 ToastUtils.show('版本');
                 },),
                 const Padding(padding: EdgeInsets.only(top: 50)),
                 FractionallySizedBox(
@@ -199,49 +206,79 @@ class MineView extends GetView<MineController> {
     );
   }
 
-
   void _showLogout(BuildContext context) {
-    showCupertinoDialog(
-        context: context,
-        builder: (context) {
-          return Theme(data: ThemeData.light(), child: CupertinoAlertDialog(
-            insetAnimationDuration: const Duration(seconds: 2),
-            title: const Text('温馨提示', style: TextStyle(fontSize: 14),),
-            content: const Text('您确定要退出账号？', style: TextStyle(fontSize: 14)),
-            actions: [
-              CupertinoDialogAction(child: const Text(
-                  '确定', style: TextStyle(fontSize: 12, color: Colors.blue)),
-                onPressed: () async {
-                  // int value = await Global.dbUtil.userBox.clear();
-                  // Global.userInfo = null;
-                  //
-                  // LogUtils.GGQ('删除用户：${value}');
-                  // Navigator.of(context).pop();
-                  // //发送事件
-                  // final event = CommonEvent(EventCode.EVENT_LOGIN,message: value.toString());
-                  // EventBusUtils.send(event);
-
-                  bool? result = await Global.dbUtil?.clearUser();
-                  if(result != null && result) {
-                    controller.clearUser();
-                    Navigator.of(context).pop();
-                  } else {
-                    ToastUtils.show('退出失败!');
-                  }
-                },),
-              CupertinoDialogAction(child: const Text(
-                  '取消', style: TextStyle(fontSize: 12, color: Colors.blue)),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ));
+    TipDialog.show(() async{
+        LogUtils.GGQ('==onConfirm==>>>>');
+        bool? result = await Global.dbUtil?.clearUser();
+        if(result != null && result) {
+          controller.clearUser();
+          TipDialog.dismiss();
+        } else {
+          ToastUtils.show('退出失败!');
         }
-    );
+      },content: '您确定要退出账号?',confirm: '确定退出?',cancel: '再看一看');
   }
 
   void _openLogin() {
     Get.toNamed(AppRoutes.LOGIN);
   }
+
+  void _openSetting(){
+    Get.toNamed(AppRoutes.SETTING);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // void _showLogout(BuildContext context) {
+  //   showCupertinoDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return Theme(data: ThemeData.light(), child: CupertinoAlertDialog(
+  //           insetAnimationDuration: const Duration(seconds: 2),
+  //           title: const Text('温馨提示', style: TextStyle(fontSize: 14),),
+  //           content: const Text('您确定要退出账号？', style: TextStyle(fontSize: 14)),
+  //           actions: [
+  //             CupertinoDialogAction(child: const Text(
+  //                 '确定', style: TextStyle(fontSize: 12, color: Colors.blue)),
+  //               onPressed: () async {
+  //                 // int value = await Global.dbUtil.userBox.clear();
+  //                 // Global.userInfo = null;
+  //                 //
+  //                 // LogUtils.GGQ('删除用户：${value}');
+  //                 // Navigator.of(context).pop();
+  //                 // //发送事件
+  //                 // final event = CommonEvent(EventCode.EVENT_LOGIN,message: value.toString());
+  //                 // EventBusUtils.send(event);
+  //
+  //                 bool? result = await Global.dbUtil?.clearUser();
+  //                 if(result != null && result) {
+  //                   controller.clearUser();
+  //                   Navigator.of(context).pop();
+  //                 } else {
+  //                   ToastUtils.show('退出失败!');
+  //                 }
+  //               },),
+  //             CupertinoDialogAction(child: const Text(
+  //                 '取消', style: TextStyle(fontSize: 12, color: Colors.blue)),
+  //               onPressed: () {
+  //                 Navigator.of(context).pop();
+  //               },
+  //             ),
+  //           ],
+  //         ));
+  //       }
+  //   );
+  // }
+
 }

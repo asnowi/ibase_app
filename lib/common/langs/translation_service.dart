@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:get/get.dart';
 
-import 'en_US.dart';
-import 'zh_Hans.dart';
+import 'langs.dart';
 
 /*
 
@@ -15,9 +15,27 @@ https://www.ibabbleon.com/iOS-Language-Codes-ISO-639.html
 class TranslationService extends Translations {
   static Locale? get locale => Get.deviceLocale;
   static final fallbackLocale = Locale('en', 'US');
+
+  static const supportedLocales = [
+    Locale('en', 'US'),
+    Locale('zh', 'CN'),
+  ];
+
+  static const localizationsDelegates = [
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ];
+
   @override
   Map<String, Map<String, String>> get keys => {
-        'en_US': en_US,
-        'zh_Hans': zh_Hans,
+        'en': LocaleMaps.en,
+        'zh': LocaleMaps.zh,
       };
 }
+
+class LocaleMaps {
+  static Map<String, String> en = localeEn;
+  static Map<String, String> zh = localeZh;
+}
+
