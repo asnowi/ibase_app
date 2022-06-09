@@ -5,6 +5,7 @@ import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/config/config.dart';
 import 'package:ibase_app/common/db/db.dart';
 import 'package:ibase_app/common/router/router.dart';
+import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
 
@@ -33,6 +34,7 @@ class MineController extends GetxController with WidgetsBindingObserver{
 
   StreamSubscription<CommonEvent>? _subscription;
 
+  String version = '';
 
   @override
   void onInit() {
@@ -53,6 +55,10 @@ class MineController extends GetxController with WidgetsBindingObserver{
       user = Global.user;
       update(['user']);
     }
+    ConfigService.to.getAppVersion().then((value) => {
+      version = '当前版本 V${value}',
+      update(['version'])
+    });
     super.onReady();
   }
 

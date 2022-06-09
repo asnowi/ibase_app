@@ -6,8 +6,9 @@ class IconText extends StatelessWidget {
   final Icon icon;
   final bool isNext;
   final Function onClick;
+  final Widget? centerChild;
 
-  IconText({required this.txt, required this.icon,required this.onClick,this.isNext = true});
+  IconText({required this.txt, required this.icon,required this.onClick,this.isNext = true,this.centerChild});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,9 @@ class IconText extends StatelessWidget {
                   const Padding(padding: EdgeInsets.only(left: 4)),
                   Expanded(
                     flex: 1,
-                    child: Text(txt,style: const TextStyle(fontSize: 12,color: Colors.black87),)
-                    ,),
+                    child: Text(txt,style: const TextStyle(fontSize: 12,color: Colors.black87),)),
+                  // Expanded(child: centerChild?? Container()),
+                  centerChild == null? Container(): Expanded(flex: 1,child: centerChild!),
                   Offstage(
                     offstage: !isNext,
                     child: const Icon(Icons.arrow_forward_ios_sharp,size: 12,color:Colors.grey),

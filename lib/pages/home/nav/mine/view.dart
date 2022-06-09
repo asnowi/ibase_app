@@ -5,6 +5,7 @@ import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/dialog/tip_dialog.dart';
 import 'package:ibase_app/common/widget/text/icon_text.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'mine.dart';
 
@@ -153,7 +154,7 @@ class MineView extends GetView<MineController> {
               children: [
                 IconText(txt: '我的位置',icon: const Icon(Iconfont.location,size: 14,color: Colors.black54),onClick: (){
                   if(controller.isHiveUser()) {
-                    ToastUtils.show('我的收藏');
+                    ToastUtils.show('我的位置');
                   } else {
                     _openLogin();
                   }
@@ -175,8 +176,17 @@ class MineView extends GetView<MineController> {
                   }
                 },),
                 Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
-                IconText(txt: '版本',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){
-                 ToastUtils.show('版本');
+                IconText(txt: '版本',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),
+                centerChild: Container(
+                  alignment: Alignment.centerRight,
+                  margin: EdgeInsets.only(right: 10.w),
+                  child: GetBuilder<MineController>(
+                    id: 'version',
+                    builder: (_) => Text(controller.version,style: TextStyle(fontSize: 12.sp,color: Colors.black87),),
+                  ),
+                ),
+                 onClick: (){
+                 ToastUtils.show(controller.version);
                 },),
                 const Padding(padding: EdgeInsets.only(top: 50)),
                 FractionallySizedBox(
