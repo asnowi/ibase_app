@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 
 import 'splash.dart';
 
-class SplashView extends GetView<SplashController> {
+class SplashView extends BaseGetView<SplashController> {
   SplashView({Key? key}) : super(key: key);
 
 

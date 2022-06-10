@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:ibase_app/common/app/app.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/dialog/tip_dialog.dart';
 import 'package:ibase_app/common/widget/text/icon_text.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 import 'mine.dart';
 
-class MineView extends GetView<MineController> {
+class MineView extends BaseGetView<MineController> {
 
 
   @override
@@ -40,7 +38,7 @@ class MineView extends GetView<MineController> {
                   alignment: Alignment.centerLeft,
                   child: GetBuilder<MineController>(
                       id: 'user',
-                      builder: (_) => controller.isHiveUser()? _buildLogined():_buildUnLogin()
+                      builder: (_) => controller.isHiveUser? _buildLogined():_buildUnLogin()
                   ),
                 );
               })
@@ -153,7 +151,7 @@ class MineView extends GetView<MineController> {
             child: Column(
               children: [
                 IconText(txt: '我的位置',icon: const Icon(Iconfont.location,size: 14,color: Colors.black54),onClick: (){
-                  if(controller.isHiveUser()) {
+                  if(controller.isHiveUser) {
                     ToastUtils.show('我的位置');
                   } else {
                     _openLogin();
@@ -161,7 +159,7 @@ class MineView extends GetView<MineController> {
                 },),
                 Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
                 IconText(txt: '我的收藏',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){
-                  if(controller.isHiveUser()) {
+                  if(controller.isHiveUser) {
                     ToastUtils.show('我的收藏');
                   } else {
                     _openLogin();
@@ -169,7 +167,7 @@ class MineView extends GetView<MineController> {
                 },),
                 Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
                 IconText(txt: '设置',icon: const Icon(Iconfont.carUp,size: 14,color: Colors.black54),onClick: (){
-                  if(controller.isHiveUser()) {
+                  if(controller.isHiveUser) {
                     _openSetting();
                   } else {
                     _openLogin();
@@ -192,7 +190,7 @@ class MineView extends GetView<MineController> {
                 FractionallySizedBox(
                   widthFactor: 0.9,
                   child: ElevatedButton(onPressed: (){
-                    if(controller.isHiveUser()) {
+                    if(controller.isHiveUser) {
                       //  退出登录
                       _showLogout(context);
                     } else {
@@ -204,7 +202,7 @@ class MineView extends GetView<MineController> {
                         backgroundColor: MaterialStateProperty.all(Colors.redAccent)
                     ), child: GetBuilder<MineController>(
                         id: 'user',
-                        builder: (_) => Text(controller.isHiveUser()? '退出登录': '请登录',style: const TextStyle(color: Colors.white,fontSize: 14),),
+                        builder: (_) => Text(controller.isHiveUser? '退出登录': '请登录',style: const TextStyle(color: Colors.white,fontSize: 14),),
                       )
                   ),
                 )

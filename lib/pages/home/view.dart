@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/tab/custom_circular_rect_angle.dart';
 import 'package:ibase_app/pages/home/nav/first/first.dart';
@@ -8,7 +8,7 @@ import 'package:lottie/lottie.dart';
 
 import 'home.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends BaseGetView<HomeController> {
 
   HomeView({Key? key}) : super(key: key);
 

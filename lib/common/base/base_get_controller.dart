@@ -3,7 +3,7 @@ import 'package:ibase_app/common/app/app.dart';
 
 class BaseGetController extends GetxController {
 
-  bool get isLogin => Global.user != null;
+  bool get isHiveUser => Global.user != null;
 
 
   @override

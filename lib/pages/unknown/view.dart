@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 
 import 'unknown.dart';
 
-class UnknownView extends GetView<UnknownController>{
+class UnknownView extends BaseGetView<UnknownController>{
   UnknownView({Key? key}) : super(key: key);
 
   @override

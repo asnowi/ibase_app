@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/values/values.dart';
 
 import 'setting.dart';
 
-class SettingView extends GetView<SettingController>{
+class SettingView extends BaseGetView<SettingController>{
 
   SettingView({Key? key}) : super(key: key);
 

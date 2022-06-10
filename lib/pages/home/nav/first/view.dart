@@ -1,10 +1,10 @@
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/values/values.dart';
 import 'package:ibase_app/common/widget/refresh/refresh.dart';
 import 'package:ibase_app/pages/home/nav/first/first.dart';
 
-class FirstView extends GetView<FirstController>{
+class FirstView extends BaseGetView<FirstController>{
 
   FirstView({Key? key}) : super(key: key);
 

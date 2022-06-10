@@ -13,10 +13,6 @@ class MineController extends BaseGetController with WidgetsBindingObserver{
 
   User? user;
 
-  bool isHiveUser(){
-    return user != null;
-  }
-
   void clearUser(){
     Global.user = null;
     user = null;

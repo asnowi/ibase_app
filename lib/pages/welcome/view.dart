@@ -1,11 +1,11 @@
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'welcome.dart';
 
-class WelcomeView extends GetView<WelcomeController> {
+class WelcomeView extends BaseGetView<WelcomeController> {
   WelcomeView({Key? key}) : super(key: key);
 
   final PageController _pageController = PageController(initialPage: 0,viewportFraction: 1, keepPage: true);

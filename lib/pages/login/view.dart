@@ -1,14 +1,13 @@
 import 'package:flutter/gestures.dart';
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/values/values.dart';
-import 'package:ibase_app/common/widget/dialog/tip_dialog.dart';
 import 'package:lottie/lottie.dart';
 import 'package:video_player/video_player.dart';
 
 import 'login.dart';
 
-class LoginView extends GetView<LoginController> {
+class LoginView extends BaseGetView<LoginController> {
   LoginView({Key? key}) : super(key: key);
 
   @override
