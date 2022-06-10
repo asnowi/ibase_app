@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,12 +29,16 @@ class MyApp extends StatelessWidget {
       designSize: designSize(),
       builder: (BuildContext context, Widget? child) {
         return RefreshConfiguration(
-          headerBuilder: () => const ClassicHeader(),
+          headerBuilder: () => const WaterDropHeader(),
           footerBuilder:  () => const ClassicFooter(),
-          hideFooterWhenNotFull: true,
-          headerTriggerDistance: 80,
-          maxOverScrollExtent: 100,
-          footerTriggerDistance: 150,
+          headerTriggerDistance: 80.0,        // header trigger refresh trigger distance
+          springDescription: const SpringDescription(stiffness: 170, damping: 16, mass: 1.9),         // custom spring back animate,the props meaning see the flutter api
+          maxOverScrollExtent :100, //The maximum dragging range of the head. Set this property if a rush out of the view area occurs
+          maxUnderScrollExtent:0, // Maximum dragging range at the bottom
+          enableScrollWhenRefreshCompleted: true, //This property is incompatible with PageView and TabBarView. If you need TabBarView to slide left and right, you need to set it to true.
+          enableLoadingWhenFailed : true, //In the case of load failure, users can still trigger more loads by gesture pull-up.
+          hideFooterWhenNotFull: false, // Disable pull-up to load more functionality when Viewport is less than one screen
+          enableBallisticLoad: true,
           child: GetMaterialApp(
             navigatorKey: navigatorKey,
             title: 'IBaseApp',

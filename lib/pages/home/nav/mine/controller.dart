@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/config/config.dart';
 import 'package:ibase_app/common/db/db.dart';
@@ -9,7 +9,7 @@ import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
 
-class MineController extends GetxController with WidgetsBindingObserver{
+class MineController extends BaseGetController with WidgetsBindingObserver{
 
   User? user;
 

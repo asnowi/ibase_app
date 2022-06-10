@@ -1,6 +1,6 @@
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 
-class SettingController extends GetxController{
+class SettingController extends BaseGetController{
 
 
 }

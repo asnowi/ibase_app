@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/api/api.dart';
 import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/config/config.dart';
@@ -8,7 +8,7 @@ import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
 import 'package:video_player/video_player.dart';
 
-class LoginController extends GetxController with WidgetsBindingObserver{
+class LoginController extends BaseGetController with WidgetsBindingObserver{
 
 
   // 声明视频控制器

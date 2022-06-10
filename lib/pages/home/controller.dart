@@ -1,9 +1,9 @@
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/config/config.dart';
 import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 
-class HomeController extends GetxController with GetSingleTickerProviderStateMixin{
+class HomeController extends BaseGetController with GetSingleTickerProviderStateMixin{
 
   late PageController pageController;
 

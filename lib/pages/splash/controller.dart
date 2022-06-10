@@ -1,9 +1,9 @@
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 
-class SplashController extends GetxController {
+class SplashController extends BaseGetController {
 
   @override
   void onInit() {

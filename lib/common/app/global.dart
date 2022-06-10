@@ -35,6 +35,8 @@ class Global{
      dbUtil = await DBUtil.getInstance();
      await StorageUtil().init();
      DioUtil.getInstance()?..openLog()..setHttpsCertificateVerification(enable: true);
+
+     user = dbUtil?.getUser();
     // 业务服务
     Get.put<ConfigService>(ConfigService());
   }

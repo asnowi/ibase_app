@@ -1,8 +1,8 @@
-import 'package:get/get.dart';
+import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class FirstController extends GetxController{
+class FirstController extends BaseGetController{
 
   final RefreshController refreshController = RefreshController();
 
