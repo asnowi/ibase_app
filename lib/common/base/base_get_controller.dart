@@ -7,17 +7,20 @@ class BaseGetController extends GetxController {
 
   bool get isHiveUser => Global.user != null;
 
+
   /// 加载状态
   var loadState = LoadState.loading;
-  /// 是否初次加载
-  var isInit = true;
 
-  /// 刷新控制器
-  RefreshController _refreshController = RefreshController();
+  //  允许下拉
+  bool enablePullDown = false;
+  //  允许上拉加载
+  bool enablePullUp = false;
 
 
   @override
   void onInit() {
+    enablePullDown = !(loadState == LoadState.loading);
+    enablePullUp = !(loadState == LoadState.loading);
     super.onInit();
   }
 
@@ -33,22 +36,49 @@ class BaseGetController extends GetxController {
     super.dispose();
   }
 
-  void initPullLoading(RefreshController refreshController) {
-      if(isInit) {
-          this._refreshController = refreshController;
-          this.loadState = LoadState.loading;
-          update(['refresh']);
-      }
+
+  void initPullLoading(){
+    enablePullDown = !(loadState == LoadState.loading);
+    enablePullUp = !(loadState == LoadState.loading);
+    updateRefresh();
   }
 
-  void onRefresh(RefreshController refreshController) {
-    this._refreshController = refreshController;
-
+  void onRefresh() {
+    updateRefresh();
   }
 
-  void onLoadMore(RefreshController refreshController) {
-    this._refreshController = refreshController;
-
+  void onLoadMore() {
+    updateRefresh();
   }
 
+  void updateRefresh(){
+     update(['refresh']);
+  }
+
+
+
+
+// void onRefresh() {
+//   DelayedUtils.delayed(() {
+//     if(_refreshController.isRefresh){
+//       _refreshController.refreshCompleted(resetFooterState: true);
+//     }
+//   });
+// }
+// final Random random = Random();
+//
+// void onLoadMore() {
+//   final num = random.nextInt(3); // 0,1,2
+//   DelayedUtils.delayed(() {
+//     if(_refreshController.isLoading){
+//       if(num == 1) {
+//         _refreshController.loadNoData();
+//       } else if(num == 2){
+//         _refreshController.loadFailed();
+//       } else {
+//         _refreshController.loadComplete();
+//       }
+//     }
+//   });
+// }
 }

@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/utils/utils.dart';
-import 'package:ibase_app/common/widget/state/state.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -40,8 +37,8 @@ class Refresh extends StatelessWidget {
   final VoidCallback? onRefresh;
   /// 上拉加载回调
   final VoidCallback? onLoadMore;
-  /// 子类，必须是ListView
-  final ListView child;
+  /// 子类
+  final Widget child;
   final RefreshController controller;
 
 
