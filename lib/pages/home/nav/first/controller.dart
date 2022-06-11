@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/entity/item_entity.dart';
 import 'package:ibase_app/common/router/router.dart';
@@ -47,10 +45,22 @@ class FirstController extends BaseGetController{
         if(refreshController.isRefresh){
           refreshController.refreshCompleted(resetFooterState: true);
         }
+        loadState = LoadState.error;
         super.onRefresh();
       });
   }
 
+  @override
+  void onRetry() {
+    loadState = LoadState.loading;
+    updateRefresh();
+    DelayedUtils.delayed(() {
+      list.clear();
+      list.add(ItemEntity(id: 1, title: '列表', describe: 'ListView + State Page + Refresh + Dio',time: TimeUtils.formatDate(format: TimeUtils.format)));
+      loadState = LoadState.success;
+      super.onRetry();
+    });
+  }
 
 
   void onItemClick(int id){

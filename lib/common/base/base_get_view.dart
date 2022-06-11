@@ -6,19 +6,15 @@ abstract class BaseGetView<T> extends GetView<T>{
   const BaseGetView({Key? key}) : super(key: key);
 
 
-
-
-
-  Widget loadingPage(){
+  Widget buildLoading(){
     return const LoadingPage();
   }
 
-  Widget emptyPage(){
+  Widget buildEmpty(){
     return const EmptyPage();
   }
 
-  Widget errorPage() {
-    return const ErrorPage();
+  Widget buildError(VoidCallback onRetry) {
+    return ErrorPage(onRetry: onRetry);
   }
-
 }

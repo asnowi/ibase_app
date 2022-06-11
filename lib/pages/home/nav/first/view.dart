@@ -1,9 +1,7 @@
-import 'dart:math';
 import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/values/values.dart';
 import 'package:ibase_app/common/widget/refresh/refresh.dart';
-import 'package:ibase_app/common/widget/state/page_state.dart';
 import 'package:ibase_app/pages/home/nav/first/first.dart';
 
 class FirstView extends BaseGetView<FirstController>{
@@ -40,15 +38,17 @@ class FirstView extends BaseGetView<FirstController>{
         id: 'refresh',
         builder: (_) => Refresh(
           enablePullDown: controller.enablePullDown,
-          enablePullUp: false,
+          enablePullUp: controller.enablePullUp,
           controller: controller.refreshController,
           onRefresh: () =>controller.onRefresh(),
           onLoadMore: () =>controller.onLoadMore(),
-          child: controller.loadState == LoadState.loading ? loadingPage() : ListView.builder(
+          loadState: controller.loadState,
+          child: ListView.builder(
             itemBuilder: (BuildContext context, int index) => _buildItem(context,index),
             itemExtent: 90.0,
             itemCount: controller.list.length,
           ),
+          onRetry: ()=> controller.onRetry(),
         ),
     );
   }
@@ -83,6 +83,8 @@ class FirstView extends BaseGetView<FirstController>{
                   ],
                 ),
               ),
-            )));
+            )
+        )
+    );
   }
 }

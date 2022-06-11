@@ -1,4 +1,6 @@
 import 'package:ibase_app/common/utils/utils.dart';
+import 'package:ibase_app/common/widget/state/page_state.dart';
+import 'package:ibase_app/common/widget/state/state.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -24,8 +26,10 @@ class Refresh extends StatelessWidget {
     this.enablePullDown = true,
     this.onRefresh,
     this.onLoadMore,
+    required this.loadState,
     required this.controller,
-    required this.child
+    required this.child,
+    required this.onRetry,
   }) : super(key: key);
 
 
@@ -38,9 +42,10 @@ class Refresh extends StatelessWidget {
   /// 上拉加载回调
   final VoidCallback? onLoadMore;
   /// 子类
+  final LoadState loadState;
   final Widget child;
   final RefreshController controller;
-
+  final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +55,8 @@ class Refresh extends StatelessWidget {
             behavior: OverScrollBehavior(),
             child: SmartRefresher(
             controller: controller,
-            enablePullDown: enablePullDown,
-            enablePullUp: enablePullUp,
+            enablePullDown: (loadState == LoadState.loading || loadState == LoadState.error)? false : enablePullDown,
+            enablePullUp: (loadState == LoadState.loading || loadState == LoadState.error)? false : enablePullDown,
             header: CustomHeader(builder: (BuildContext context, RefreshStatus? mode) {
               const TextStyle textStyle = TextStyle(fontSize: 12.0,color: Colors.black87);
               Widget body = const Text('加载中...',style: textStyle);
@@ -119,10 +124,35 @@ class Refresh extends StatelessWidget {
             ),
             onRefresh: onRefresh,
             onLoading: onLoadMore,
-            child: child,
+            child: _buildChild(),
           )
         ),
     );
+  }
+
+
+  Widget _buildChild(){
+    if(loadState == LoadState.loading) {
+      return buildLoading();
+    } else if(loadState == LoadState.empty){
+      return buildEmpty();
+    } else if(loadState == LoadState.error) {
+      return buildError(onRetry);
+    }
+    return child;
+  }
+
+
+  Widget buildLoading(){
+    return const LoadingPage();
+  }
+
+  Widget buildEmpty(){
+    return const EmptyPage();
+  }
+
+  Widget buildError(VoidCallback onRetry) {
+    return ErrorPage(onRetry: onRetry);
   }
 }
 

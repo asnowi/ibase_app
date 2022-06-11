@@ -11,15 +11,13 @@ class BaseGetController extends GetxController {
   var loadState = LoadState.loading;
 
   //  允许下拉
-  bool enablePullDown = false;
+  bool enablePullDown = true;
   //  允许上拉加载
-  bool enablePullUp = false;
+  bool enablePullUp = true;
 
 
   @override
   void onInit() {
-    enablePullDown = !(loadState == LoadState.loading);
-    enablePullUp = !(loadState == LoadState.loading);
     super.onInit();
   }
 
@@ -37,8 +35,10 @@ class BaseGetController extends GetxController {
 
 
   void initPullLoading(){
-    enablePullDown = !(loadState == LoadState.loading);
-    enablePullUp = !(loadState == LoadState.loading);
+    updateRefresh();
+  }
+
+  void onRetry(){
     updateRefresh();
   }
 

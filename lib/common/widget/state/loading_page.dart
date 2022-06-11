@@ -7,9 +7,13 @@ class LoadingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: CircularProgressIndicator(),
+    return SafeArea(
+      child: Center(
+        child: Container(
+          alignment: Alignment.center,
+          child: CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }

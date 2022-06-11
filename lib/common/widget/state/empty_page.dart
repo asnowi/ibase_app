@@ -7,19 +7,22 @@ class EmptyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          Lottie.asset(AssetsProvider.lottiePath('page_empty')),
-          const Padding(padding: EdgeInsets.only(top: 20)),
-          Text('暂无数据',style: TextStyle(
-            color: Colors.black54.withOpacity(0.6),
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'FZDaLTJ',
-          ))
-        ],
+    return SafeArea(
+      child: Center(
+        child: Container(
+          width: 200,
+          height: 300,
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              Lottie.asset(AssetsProvider.lottiePath('page_empty')),
+              const Text('暂无数据',style: TextStyle(
+                color: Colors.white60,
+                fontSize: 14,
+              ))
+            ],
+          ),
+        ),
       ),
     );
   }
