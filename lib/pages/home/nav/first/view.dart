@@ -14,9 +14,9 @@ class FirstView extends BaseGetView<FirstController>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: Colors.redAccent,
       appBar: AppBar(
-        elevation: 0.2,
+        elevation: 2.0,
         centerTitle: true,
         automaticallyImplyLeading: false,
         titleTextStyle: AppStyles.titleStyle,
@@ -54,6 +54,11 @@ class FirstView extends BaseGetView<FirstController>{
   }
 
   Widget _buildItem(BuildContext context,int index){
-    return Card(child: Center(child: Text(controller.list[index],style: TextStyle(fontSize: 16.sp,color: Colors.black87))));
+    return Card(
+        elevation: 2.0,
+        margin: const EdgeInsets.only(top: 10.0,bottom: 2.0,left: 12.0,right: 12.0),
+        shadowColor: Colors.blueGrey,
+        color: Colors.white,
+        child: Center(child: Text(controller.list[index],style: TextStyle(fontSize: 16.sp,color: Colors.black87))));
   }
 }

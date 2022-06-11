@@ -95,7 +95,7 @@ class HomeView extends BaseGetView<HomeController> {
     },
         splashColor: Colors.blueGrey.shade100,
         highlightColor: Colors.blueGrey.shade50,
-        elevation: 1.2,
+        elevation: 4.0,
         shape: const CircleBorder(),
         child: _buildItemBox(index)
     );
