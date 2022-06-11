@@ -6,11 +6,11 @@ class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        width: 200,
-        height: 300,
-        alignment: Alignment.center,
+    return Container(
+      width: 200,
+      height: 300,
+      alignment: Alignment.center,
+      child: SafeArea(
         child: Column(
           children: [
             Lottie.asset(AssetsProvider.lottiePath('page_error')),
