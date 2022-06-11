@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/widget/state/page_state.dart';
-import 'package:pull_to_refresh/src/smart_refresher.dart';
 
 class BaseGetController extends GetxController {
 

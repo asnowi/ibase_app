@@ -46,7 +46,7 @@ class FirstView extends BaseGetView<FirstController>{
           onLoadMore: () =>controller.onLoadMore(),
           child: controller.loadState == LoadState.loading ? loadingPage() : ListView.builder(
             itemBuilder: (BuildContext context, int index) => _buildItem(context,index),
-            itemExtent: 100.0,
+            itemExtent: 90.0,
             itemCount: controller.list.length,
           ),
         ),
@@ -59,6 +59,30 @@ class FirstView extends BaseGetView<FirstController>{
         margin: const EdgeInsets.only(top: 10.0,bottom: 2.0,left: 12.0,right: 12.0),
         shadowColor: Colors.blueGrey,
         color: Colors.white,
-        child: Center(child: Text(controller.list[index],style: TextStyle(fontSize: 16.sp,color: Colors.black87))));
+        child: TextButton(
+            onPressed: ()=> controller.onItemClick(controller.list[index].id),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints.expand(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(controller.list[index].title,style: TextStyle(fontSize: 14.sp,color: Colors.black87,fontWeight: FontWeight.bold)),
+                    Text(controller.list[index].describe,style: TextStyle(fontSize: 12.sp,color: Colors.black54)),
+                    Row(
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Container(),
+                        ),
+                        Text(controller.list[index].time,style: TextStyle(fontSize: 10.sp,color: Colors.redAccent.shade100))
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            )));
   }
 }

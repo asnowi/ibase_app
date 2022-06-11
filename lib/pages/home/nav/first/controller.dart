@@ -1,6 +1,9 @@
 import 'dart:math';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:ibase_app/common/base/base.dart';
+import 'package:ibase_app/common/entity/item_entity.dart';
+import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/state/page_state.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -9,7 +12,7 @@ class FirstController extends BaseGetController{
 
   final RefreshController refreshController = RefreshController();
 
-  List<String> list = [];
+  List<ItemEntity> list = [];
 
   @override
   void onInit() {
@@ -28,10 +31,8 @@ class FirstController extends BaseGetController{
 
   @override
   void initPullLoading() {
-    DelayedUtils.delayed(milliseconds: 5000,() {
-      for (int i = 0; i < 10; i++) {
-        list.add(i.toString());
-      }
+    DelayedUtils.delayed(() {
+      list.add(ItemEntity(id: 1, title: '列表', describe: 'ListView + State Page + Refresh + Dio',time: TimeUtils.formatDate(format: TimeUtils.format)));
       loadState = LoadState.success;
       super.initPullLoading();
     });
@@ -41,15 +42,28 @@ class FirstController extends BaseGetController{
   @override
   void onRefresh() {
       DelayedUtils.delayed(() {
-        final next = random.nextInt(100);
         list.clear();
-        for (int i = 0; i < 10; i++) {
-          list.add((i + next).toString());
-        }
+        list.add(ItemEntity(id: 1, title: '列表', describe: 'ListView + State Page + Refresh + Dio',time: TimeUtils.formatDate(format: TimeUtils.format)));
         if(refreshController.isRefresh){
           refreshController.refreshCompleted(resetFooterState: true);
         }
         super.onRefresh();
       });
+  }
+
+
+
+  void onItemClick(int id){
+    switch(id) {
+      case 1: {
+        Get.toNamed(AppRoutes.LIST);
+      }
+      break;
+
+      default: {
+        ToastUtils.show('未知:${id}');
+      }
+      break;
+    }
   }
 }

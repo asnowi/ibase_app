@@ -9,6 +9,10 @@ abstract class AppRoutes {
   static const HOME_MINE = '/home/mine';
   static const SETTING = '/setting';
 
+  /// demo
+  static const LIST = '/list';
+
+
   static const TEST = '/test';
   static const UNKNOWN = '/unknown';
 
