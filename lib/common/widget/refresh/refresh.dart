@@ -22,14 +22,14 @@ enum RefreshState {
 class Refresh extends StatelessWidget {
   const Refresh({
     Key? key,
-    this.enablePullUp = true,
-    this.enablePullDown = true,
+    this.enablePullUp = false,
+    this.enablePullDown = false,
     this.onRefresh,
     this.onLoadMore,
+    this.onRetry,
     required this.loadState,
     required this.controller,
-    required this.child,
-    required this.onRetry,
+    required this.child
   }) : super(key: key);
 
 
@@ -41,11 +41,13 @@ class Refresh extends StatelessWidget {
   final VoidCallback? onRefresh;
   /// 上拉加载回调
   final VoidCallback? onLoadMore;
+  /// 错误页重试
+  final VoidCallback? onRetry;
+
   /// 子类
   final LoadState loadState;
   final Widget child;
   final RefreshController controller;
-  final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,7 @@ class Refresh extends StatelessWidget {
             child: SmartRefresher(
             controller: controller,
             enablePullDown: (loadState == LoadState.loading || loadState == LoadState.error)? false : enablePullDown,
-            enablePullUp: (loadState == LoadState.loading || loadState == LoadState.error)? false : enablePullDown,
+            enablePullUp: (loadState == LoadState.loading || loadState == LoadState.error)? false : enablePullUp,
             header: CustomHeader(builder: (BuildContext context, RefreshStatus? mode) {
               const TextStyle textStyle = TextStyle(fontSize: 12.0,color: Colors.black87);
               Widget body = const Text('加载中...',style: textStyle);
@@ -151,7 +153,7 @@ class Refresh extends StatelessWidget {
     return const EmptyPage();
   }
 
-  Widget buildError(VoidCallback onRetry) {
+  Widget buildError(VoidCallback? onRetry) {
     return ErrorPage(onRetry: onRetry);
   }
 }

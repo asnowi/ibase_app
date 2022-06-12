@@ -37,15 +37,24 @@ class FirstController extends BaseGetController{
   }
 
   final Random random = Random();
+
   @override
   void onRefresh() {
-      DelayedUtils.delayed(() {
+    final next = random.nextInt(3); // 0,1,2
+
+    DelayedUtils.delayed(() {
         list.clear();
         list.add(ItemEntity(id: 1, title: '列表', describe: 'ListView + State Page + Refresh + Dio',time: TimeUtils.formatDate(format: TimeUtils.format)));
         if(refreshController.isRefresh){
           refreshController.refreshCompleted(resetFooterState: true);
         }
-        loadState = LoadState.error;
+        if(next == 1) {
+          loadState = LoadState.empty;
+        } else if(next == 2){
+          loadState = LoadState.error;
+        } else {
+          loadState = LoadState.success;
+        }
         super.onRefresh();
       });
   }
@@ -54,10 +63,18 @@ class FirstController extends BaseGetController{
   void onRetry() {
     loadState = LoadState.loading;
     updateRefresh();
+
+    final next = random.nextInt(3); // 0,1,2
     DelayedUtils.delayed(() {
       list.clear();
       list.add(ItemEntity(id: 1, title: '列表', describe: 'ListView + State Page + Refresh + Dio',time: TimeUtils.formatDate(format: TimeUtils.format)));
-      loadState = LoadState.success;
+      if(next == 1) {
+        loadState = LoadState.empty;
+      } else if(next == 2){
+        loadState = LoadState.error;
+      } else {
+        loadState = LoadState.success;
+      }
       super.onRetry();
     });
   }

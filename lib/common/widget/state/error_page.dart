@@ -5,10 +5,10 @@ class ErrorPage extends StatelessWidget {
 
   const ErrorPage({
     Key? key,
-    required this.onRetry
+    this.onRetry
   }) : super(key: key);
 
-  final VoidCallback onRetry;
+  final VoidCallback? onRetry;
 
   @override
   Widget build(BuildContext context) {

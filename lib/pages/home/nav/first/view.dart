@@ -38,10 +38,8 @@ class FirstView extends BaseGetView<FirstController>{
         id: 'refresh',
         builder: (_) => Refresh(
           enablePullDown: controller.enablePullDown,
-          enablePullUp: controller.enablePullUp,
           controller: controller.refreshController,
           onRefresh: () =>controller.onRefresh(),
-          onLoadMore: () =>controller.onLoadMore(),
           loadState: controller.loadState,
           child: ListView.builder(
             itemBuilder: (BuildContext context, int index) => _buildItem(context,index),
@@ -73,10 +71,7 @@ class FirstView extends BaseGetView<FirstController>{
                     Text(controller.list[index].describe,style: TextStyle(fontSize: 12.sp,color: Colors.black54)),
                     Row(
                       children: [
-                        Flexible(
-                          flex: 1,
-                          child: Container(),
-                        ),
+                        Flexible(flex: 1, child: Container(),),
                         Text(controller.list[index].time,style: TextStyle(fontSize: 10.sp,color: Colors.redAccent.shade100))
                       ],
                     )

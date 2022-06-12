@@ -26,7 +26,7 @@ class PageConfig {
         // 是否允许通过手势来触发加载更多当没有更多数据的状态
         enableLoadingWhenNoData: false,
         enableLoadMoreVibrate: false,
-        enableLoadingWhenFailed : true,
+        enableLoadingWhenFailed : false,
         shouldFooterFollowWhenNotFull: (state) {
           // If you want load more with noMoreData state ,may be you should return false
           return false;
