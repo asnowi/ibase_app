@@ -1,5 +1,5 @@
 class GlobalConfig{
-  static const String BASE_URL = 'https://www.wanandroid.com';
+  static const String BASE_URL = 'http://47.107.99.40:3000';
 }
 
 class SaveInfoKey {

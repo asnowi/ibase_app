@@ -1,32 +1,32 @@
 class LoginEntity {
   LoginEntity({
-      this.id, 
+      this.userId,
       this.nickname, 
       this.username,
       this.token,
-      this.icon,
+      this.avatar,
   });
 
   LoginEntity.fromJson(dynamic json) {
-    id = json['id'];
+    userId = json['userId'].toString();
     nickname = json['nickname'];
     username = json['username'];
     token = json['token'];
-    icon = json['icon'];
+    avatar = json['avatar'];
   }
-  int? id;
+  String? userId;
   String? nickname;
   String? username;
   String? token;
-  String? icon;
+  String? avatar;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
+    map['userId'] = userId;
     map['nickname'] = nickname;
     map['username'] = username;
     map['token'] = token;
-    map['icon'] = icon;
+    map['avatar'] = avatar;
     return map;
   }
 

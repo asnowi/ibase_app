@@ -10,9 +10,9 @@ class DioInterceptors extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
 
     // 对非open的接口的请求参数全部增加userId
-    if (!options.path.contains("open")) {
-      options.queryParameters["userId"] = "xxx";
-    }
+    // if (!options.path.contains("open")) {
+    //   options.queryParameters["userId"] = "xxx";
+    // }
 
     // 头部添加token
     final String? token = StorageUtil().getJSON(SaveInfoKey.TOKEN);
@@ -37,15 +37,38 @@ class DioInterceptors extends Interceptor {
       // response.data = DioResponse(errorCode: DioResponseCode.SUCCESS, errorMsg: "操作成功~!", data: response.data);
       final body = response.data;
       if(body == null) {
-        response.data = DioResponse(errorCode: DioResponseCode.ERROR, errorMsg: "操作失败~!");
+        response.data = DioResponse(code: DioResponseCode.ERROR, msg: "操作失败~!");
       } else {
-        final errorCode = body['errorCode'];
-        final errorMsg = body['errorMsg'];
-        final data = body['data'];
-        response.data = DioResponse(errorCode: errorCode, errorMsg: errorMsg,data: data);
+        if(response.requestOptions.path.contains('login/cellphone')) {
+          final code = body['code'];
+          final msg = body['msg'];
+
+          if(code == 200) {
+            final account = body['account'];
+            final profile = body['profile'];
+            final token = body['token'];
+
+            final data = {
+              'userId': profile['userId'],
+              'nickname': profile['nickname'],
+              'token': token,
+              'avatar': profile['avatarUrl'],
+              'username': account['userName']
+            };
+            response.data = DioResponse(code: code, msg: msg,data: data);
+          } else {
+            response.data = DioResponse(code: code, msg: msg,data: null);
+          }
+
+        } else {
+          final code = body['code'];
+          final msg = body['msg'];
+          final data = body['data'];
+          response.data = DioResponse(code: code, msg: msg,data: data);
+        }
       }
     } else {
-      response.data = DioResponse(errorCode: DioResponseCode.ERROR, errorMsg: "操作失败~!");
+      response.data = DioResponse(code: DioResponseCode.ERROR, msg: "操作失败~!");
     }
 
     // 对某些单独的url返回数据做特殊处理
@@ -67,36 +90,43 @@ class DioInterceptors extends Interceptor {
       case DioErrorType.connectTimeout:
         {
           // 根据自己的业务需求来设定该如何操作,可以是弹出框提示/或者做一些路由跳转处理
+          LogUtils.GGQ('http error===connectTimeout:>${err.message}');
         }
         break;
     // 响应超时
       case DioErrorType.receiveTimeout:
         {
           // 根据自己的业务需求来设定该如何操作,可以是弹出框提示/或者做一些路由跳转处理
+          LogUtils.GGQ('http error===receiveTimeout:>${err.message}');
         }
         break;
     // 发送超时
       case DioErrorType.sendTimeout:
         {
           // 根据自己的业务需求来设定该如何操作,可以是弹出框提示/或者做一些路由跳转处理
+          LogUtils.GGQ('http error===sendTimeout:>${err.message}');
         }
         break;
     // 请求取消
       case DioErrorType.cancel:
         {
           // 根据自己的业务需求来设定该如何操作,可以是弹出框提示/或者做一些路由跳转处理
+          LogUtils.GGQ('http error===cancel:>${err.message}');
+
         }
         break;
     // 404/503错误
       case DioErrorType.response:
         {
           // 根据自己的业务需求来设定该如何操作,可以是弹出框提示/或者做一些路由跳转处理
+          LogUtils.GGQ('http error===response:>${err.message}');
+
         }
         break;
     // other 其他错误类型
       case DioErrorType.other:
         {
-
+          LogUtils.GGQ('http error===other:>${err.message}');
         }
         break;
 

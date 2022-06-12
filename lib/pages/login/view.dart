@@ -228,6 +228,11 @@ class LoginView extends BaseGetView<LoginController> {
     );
   }
   Widget _buildInputPassword(){
+    const String _password = 'gaoguanqi109';
+    if(_password.isNotEmpty){
+      controller.passwordController.text = _password;
+      controller.setPassword(controller.passwordController.text.isNotEmpty);
+    }
     return ConstrainedBox(
       constraints: BoxConstraints(
           maxHeight: 48.h,

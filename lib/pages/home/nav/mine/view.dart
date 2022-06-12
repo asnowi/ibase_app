@@ -94,7 +94,7 @@ class MineView extends BaseGetView<MineController> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text((controller.user?.phone != null)? controller.user!.phone!:'',overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 16,color: Colors.white,fontFamily: 'FZDaLTJ',fontWeight: FontWeight.bold),),
+                Text((controller.user?.username != null)? controller.user!.username!:'',overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 16,color: Colors.white,fontFamily: 'FZDaLTJ',fontWeight: FontWeight.bold),),
                 Text((controller.user?.avatarImg != null)? controller.user!.avatarImg!:'',overflow: TextOverflow.ellipsis,style: const TextStyle(fontSize: 12,color: Colors.white60),),
               ],
             ),

@@ -54,14 +54,14 @@ class LoginController extends BaseGetController with WidgetsBindingObserver{
 
       ApiService.login(account, password).then((value) async{
         LogUtils.GGQ('------登录结果:------>>>${value}');
-        if(ResponseUtils.isSuccess(value.errorCode)) {
+        if(ResponseUtils.isSuccess(value.code)) {
             final entity = LoginEntity.fromJson(value.data);
             final User user = User();
-            user.userId = entity.id?.toString();
+            user.userId = entity.userId;
             user.token = entity.token;
-            user.username = entity.username;
-            user.phone = entity.username;
-            user.avatarImg = 'http://p1.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg';
+            user.username = entity.nickname;
+            user.phone = account;
+            user.avatarImg = entity.avatar;
 
             final int? result = await Global.dbUtil?.saveUser(user);
             if(result != null && result >= 0) {
@@ -72,7 +72,7 @@ class LoginController extends BaseGetController with WidgetsBindingObserver{
               ToastUtils.showBar('保存用户信息失败！');
             }
         } else {
-          ToastUtils.showBar(ResponseUtils.getError(value.errorMsg));
+          ToastUtils.showBar(ResponseUtils.getError(value.msg));
         }
       }).whenComplete(() => {
         loadingButton.onCancel()
