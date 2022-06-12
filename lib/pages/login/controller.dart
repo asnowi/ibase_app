@@ -72,7 +72,7 @@ class LoginController extends BaseGetController with WidgetsBindingObserver{
               ToastUtils.showBar('保存用户信息失败！');
             }
         } else {
-          ToastUtils.showBar(ResponseUtils.getError(value.msg));
+          ToastUtils.showBar(ResponseUtils.getMessage(value.msg));
         }
       }).whenComplete(() => {
         loadingButton.onCancel()

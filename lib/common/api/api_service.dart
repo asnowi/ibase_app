@@ -12,5 +12,13 @@ class ApiService{
   }
 
 
-  /// 
+  ///  列表
+  static Future<DioResponse>getArtistsList(
+      int offset,
+      int limit) async{
+    return await DioUtil().request<DioResponse>('/top/artists',method: DioMethod.get,params: {
+      'offset': offset,
+      'limit': limit,
+    });
+  }
 }

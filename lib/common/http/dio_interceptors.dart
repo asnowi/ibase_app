@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ibase_app/common/config/config.dart';
+import 'package:ibase_app/common/entity/entity.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 
 import 'http.dart';
@@ -39,7 +40,7 @@ class DioInterceptors extends Interceptor {
       if(body == null) {
         response.data = DioResponse(code: DioResponseCode.ERROR, msg: "操作失败~!");
       } else {
-        if(response.requestOptions.path.contains('login/cellphone')) {
+        if(response.requestOptions.path.contains('/login/cellphone')) {
           final code = body['code'];
           final msg = body['msg'];
 
@@ -60,6 +61,21 @@ class DioInterceptors extends Interceptor {
             response.data = DioResponse(code: code, msg: msg,data: null);
           }
 
+        } else if(response.requestOptions.path.contains('/top/artists')){
+          final code = body['code'];
+          final msg = body['msg'];
+
+          if(code == 200) {
+            final more = body['more'];
+            final List<dynamic> artists = body['artists'];
+            final data = {
+              'more': more,
+              'artists': artists,
+            };
+            response.data = DioResponse(code: code, msg: msg,data: data);
+          } else {
+            response.data = DioResponse(code: code, msg: msg,data: null);
+          }
         } else {
           final code = body['code'];
           final msg = body['msg'];
@@ -85,6 +101,7 @@ class DioInterceptors extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
+    ToastUtils.show(err.message);
     switch(err.type) {
     // 连接服务器超时
       case DioErrorType.connectTimeout:

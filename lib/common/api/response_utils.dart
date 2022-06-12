@@ -7,10 +7,10 @@ class ResponseUtils {
     return code == DioResponseCode.SUCCESS;
   }
 
-  static String getError(String? error){
-    if(error == null) {
+  static String getMessage(String? msg){
+    if(msg == null) {
       return '操作失败!!!';
     }
-    return error;
+    return msg;
   }
 }
