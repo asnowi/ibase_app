@@ -51,9 +51,9 @@ class ListController extends BaseGetController{
         ToastUtils.showBar(ResponseUtils.getMessage(value.msg));
         loadState = LoadState.error;
       }
-      super.initPullLoading();
     }).onError((error, stackTrace){
       loadState = LoadState.error;
+    }).whenComplete(() {
       super.initPullLoading();
     });
   }
@@ -76,10 +76,10 @@ class ListController extends BaseGetController{
         ToastUtils.showBar(ResponseUtils.getMessage(value.msg));
       }
       super.onRefresh();
-    }).whenComplete(() => {
-        if(refreshController.isRefresh){
-          refreshController.refreshCompleted(resetFooterState: true)
-        }
+    }).whenComplete(() {
+      if(refreshController.isRefresh){
+        refreshController.refreshCompleted(resetFooterState: true);
+      }
     });
   }
 
