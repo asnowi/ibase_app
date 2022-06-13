@@ -52,6 +52,9 @@ class ListController extends BaseGetController{
         loadState = LoadState.error;
       }
       super.initPullLoading();
+    }).onError((error, stackTrace){
+      loadState = LoadState.error;
+      super.initPullLoading();
     });
   }
 
@@ -105,6 +108,10 @@ class ListController extends BaseGetController{
           }
         }
         super.onLoadMore();
+      }).onError((error, stackTrace){
+        if(refreshController.isLoading) {
+          refreshController.loadFailed();
+        }
       });
     } else {
       DelayedUtils.delayed(() {

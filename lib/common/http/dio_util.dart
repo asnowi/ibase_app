@@ -144,7 +144,9 @@ class DioUtil {
       );
       return response.data;
     } on DioError catch (e) {
-      throw e;
+      // throw e;
+      LogUtils.GGQ('==http==DioError==>>>>>${e.message}');
+      return e.response?.data;
     } finally {
       LogUtils.GGQ('----finally-----');
     }
