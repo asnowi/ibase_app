@@ -4,14 +4,14 @@ class DioResponse<Object> {
   /// 自定义code(可根据内部定义方式)
   final int? code;
   /// 消息(例如成功消息文字/错误消息文字)
-  final String? msg;
+  final String? message;
   /// 接口返回的数据
   final Object? data;
   /// 需要添加更多
   /// .........
   DioResponse({
     this.code,
-    this.msg,
+    this.message,
     this.data,
   });
 
@@ -19,7 +19,7 @@ class DioResponse<Object> {
   @override
   String toString() {
     StringBuffer sb = StringBuffer('{');
-    sb.write("\"msg\":\"$msg\"");
+    sb.write("\"message\":\"$message\"");
     sb.write(",\"code\":\"$code\"");
     sb.write(",\"data\":\"${data.toString()}\"");
     sb.write('}');

@@ -48,7 +48,7 @@ class ListController extends BaseGetController{
           loadState = LoadState.empty;
         }
       } else {
-        ToastUtils.showBar(ResponseUtils.getMessage(value.msg));
+        ToastUtils.showBar(ResponseUtils.getMessage(value.message));
         loadState = LoadState.error;
       }
     }).onError((error, stackTrace){
@@ -70,10 +70,10 @@ class ListController extends BaseGetController{
           list.clear();
           list.addAll(entity.artists!);
         }else {
-          ToastUtils.showBar(ResponseUtils.getMessage(value.msg));
+          ToastUtils.showBar(ResponseUtils.getMessage(value.message));
         }
       } else {
-        ToastUtils.showBar(ResponseUtils.getMessage(value.msg));
+        ToastUtils.showBar(ResponseUtils.getMessage(value.message));
       }
       super.onRefresh();
     }).whenComplete(() {
@@ -96,13 +96,13 @@ class ListController extends BaseGetController{
               refreshController.loadComplete();
             }
           }else {
-            ToastUtils.showBar(ResponseUtils.getMessage(value.msg));
+            ToastUtils.showBar(ResponseUtils.getMessage(value.message));
             if(refreshController.isLoading) {
               refreshController.loadNoData();
             }
           }
         } else {
-          ToastUtils.showBar(ResponseUtils.getMessage(value.msg));
+          ToastUtils.showBar(ResponseUtils.getMessage(value.message));
           if(refreshController.isLoading) {
             refreshController.loadFailed();
           }

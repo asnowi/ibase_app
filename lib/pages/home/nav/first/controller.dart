@@ -31,6 +31,7 @@ class FirstController extends BaseGetController{
   void initPullLoading() {
     DelayedUtils.delayed(() {
       list.add(ItemEntity(id: 1, title: '列表', describe: 'ListView + State Page + Refresh + Dio',time: TimeUtils.formatDate(format: TimeUtils.format)));
+      list.add(ItemEntity(id: 2, title: '轮播图', describe: 'Banner + ListView',time: TimeUtils.formatDate(format: TimeUtils.format)));
       loadState = LoadState.success;
       super.initPullLoading();
     });
@@ -45,6 +46,7 @@ class FirstController extends BaseGetController{
     DelayedUtils.delayed(() {
         list.clear();
         list.add(ItemEntity(id: 1, title: '列表', describe: 'ListView + State Page + Refresh + Dio',time: TimeUtils.formatDate(format: TimeUtils.format)));
+        list.add(ItemEntity(id: 2, title: '轮播图', describe: 'Banner + ListView',time: TimeUtils.formatDate(format: TimeUtils.format)));
         if(refreshController.isRefresh){
           refreshController.refreshCompleted(resetFooterState: true);
         }
@@ -68,6 +70,8 @@ class FirstController extends BaseGetController{
     DelayedUtils.delayed(() {
       list.clear();
       list.add(ItemEntity(id: 1, title: '列表', describe: 'ListView + State Page + Refresh + Dio',time: TimeUtils.formatDate(format: TimeUtils.format)));
+      list.add(ItemEntity(id: 2, title: '轮播图', describe: 'Banner + ListView',time: TimeUtils.formatDate(format: TimeUtils.format)));
+
       if(next == 1) {
         loadState = LoadState.empty;
       } else if(next == 2){
@@ -84,6 +88,11 @@ class FirstController extends BaseGetController{
     switch(id) {
       case 1: {
         Get.toNamed(AppRoutes.LIST);
+      }
+      break;
+
+      case 2: {
+        Get.toNamed(AppRoutes.BANNER);
       }
       break;
 

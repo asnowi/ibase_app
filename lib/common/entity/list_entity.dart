@@ -33,26 +33,26 @@ class ArtistsEntity {
     this.name,
     this.picUrl,
     this.img1v1Url,
-    this.fansCount,
+    this.musicSize,
   });
 
   ArtistsEntity.fromJson(dynamic json) {
     name = json['name'];
     picUrl = json['picUrl'];
     img1v1Url = json['img1v1Url'];
-    fansCount = json['fansCount']?? 0;
+    musicSize = json['musicSize']?.toString();
   }
   String? name;
   String? picUrl;
   String? img1v1Url;
-  int? fansCount;
+  String? musicSize;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['name'] = name;
     map['picUrl'] = picUrl;
     map['img1v1Url'] = img1v1Url;
-    map['fansCount'] = fansCount;
+    map['musicSize'] = musicSize?.toString();
     return map;
   }
 

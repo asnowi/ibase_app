@@ -25,8 +25,8 @@ class MineView extends BaseGetView<MineController> {
   List<Widget> _buildHeader(BuildContext context, bool innerBoxIsScrolled) {
     return [
       SliverAppBar(
-          collapsedHeight: 120.h,
-          expandedHeight: 120.h,
+          collapsedHeight: 120.h, // 小
+          expandedHeight: 120.h, //大
           elevation: 0.8,
           floating: false,//是否随着滑动隐藏标题
           pinned: true,//是否让标题固定在顶部
@@ -146,67 +146,68 @@ class MineView extends BaseGetView<MineController> {
             ),
           ),
           Container(height: 100.h,color: Colors.grey[50],),
-          Container(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: Column(
-              children: [
-                IconText(txt: '我的位置',icon: const Icon(Iconfont.location,size: 14,color: Colors.black54),onClick: (){
-                  if(controller.isHiveUser) {
-                    ToastUtils.show('我的位置');
-                  } else {
-                    _openLogin();
-                  }
-                },),
-                Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
-                IconText(txt: '我的收藏',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){
-                  if(controller.isHiveUser) {
-                    ToastUtils.show('我的收藏');
-                  } else {
-                    _openLogin();
-                  }
-                },),
-                Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
-                IconText(txt: '设置',icon: const Icon(Iconfont.carUp,size: 14,color: Colors.black54),onClick: (){
-                  if(controller.isHiveUser) {
-                    _openSetting();
-                  } else {
-                    _openLogin();
-                  }
-                },),
-                Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
-                IconText(txt: '版本',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),
-                centerChild: Container(
-                  alignment: Alignment.centerRight,
-                  margin: EdgeInsets.only(right: 10.w),
-                  child: GetBuilder<MineController>(
-                    id: 'version',
-                    builder: (_) => Text(controller.version,style: TextStyle(fontSize: 12.sp,color: Colors.black87),),
-                  ),
-                ),
-                 onClick: (){
-                 ToastUtils.show(controller.version);
-                },),
-                const Padding(padding: EdgeInsets.only(top: 50)),
-                FractionallySizedBox(
-                  widthFactor: 0.9,
-                  child: ElevatedButton(onPressed: (){
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  IconText(txt: '我的位置',icon: const Icon(Iconfont.location,size: 14,color: Colors.black54),onClick: (){
                     if(controller.isHiveUser) {
-                      //  退出登录
-                      _showLogout(context);
+                      ToastUtils.show('我的位置');
                     } else {
                       _openLogin();
                     }
-                  },
-                    style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(Size(getWidth() * 0.72, 46.h)),
-                        backgroundColor: MaterialStateProperty.all(Colors.redAccent)
-                    ), child: GetBuilder<MineController>(
-                        id: 'user',
-                        builder: (_) => Text(controller.isHiveUser? '退出登录': '请登录',style: const TextStyle(color: Colors.white,fontSize: 14),),
-                      )
-                  ),
-                )
-              ],
+                  },),
+                  Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '我的收藏',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),onClick: (){
+                    if(controller.isHiveUser) {
+                      ToastUtils.show('我的收藏');
+                    } else {
+                      _openLogin();
+                    }
+                  },),
+                  Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '设置',icon: const Icon(Iconfont.carUp,size: 14,color: Colors.black54),onClick: (){
+                    if(controller.isHiveUser) {
+                      _openSetting();
+                    } else {
+                      _openLogin();
+                    }
+                  },),
+                  Divider(height: 5,color: Colors.grey[50],thickness: 1,indent: 30,),
+                  IconText(txt: '版本',icon: const Icon(Iconfont.about,size: 14,color: Colors.black54),
+                    centerChild: Container(
+                      alignment: Alignment.centerRight,
+                      margin: EdgeInsets.only(right: 10.w),
+                      child: GetBuilder<MineController>(
+                        id: 'version',
+                        builder: (_) => Text(controller.version,style: TextStyle(fontSize: 12.sp,color: Colors.black87),),
+                      ),
+                    ),
+                    onClick: (){
+                      ToastUtils.show(controller.version);
+                    },),
+                  const Padding(padding: EdgeInsets.only(top: 50)),
+                  FractionallySizedBox(
+                    widthFactor: 0.9,
+                    child: ElevatedButton(onPressed: (){
+                      if(controller.isHiveUser) {
+                        //  退出登录
+                        _showLogout(context);
+                      } else {
+                        _openLogin();
+                      }
+                    },
+                        style: ButtonStyle(
+                            minimumSize: MaterialStateProperty.all(Size(getWidth() * 0.72, 46.h)),
+                            backgroundColor: MaterialStateProperty.all(Colors.redAccent)
+                        ), child: GetBuilder<MineController>(
+                          id: 'user',
+                          builder: (_) => Text(controller.isHiveUser? '退出登录': '请登录',style: const TextStyle(color: Colors.white,fontSize: 14),),
+                        )
+                    ),
+                  )
+                ],
+              )
             ),
           ),
         ],

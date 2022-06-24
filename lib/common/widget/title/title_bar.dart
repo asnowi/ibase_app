@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class TitleBar extends StatelessWidget implements PreferredSizeWidget{
   final String title;
-  final bool isBack;
-  final Function onBack;
+  final VoidCallback? onBack;
 
-  const TitleBar({required this.title,required this.isBack,required this.onBack});
+
+  const TitleBar({required this.title,this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +17,8 @@ class TitleBar extends StatelessWidget implements PreferredSizeWidget{
         top: true,
         child: Stack(
           children: [
-            Offstage(
-              offstage: !isBack,
+            Visibility(
+              visible: (onBack == null)? true: false,
               child: IconButton(icon: const Icon(Icons.arrow_back_ios_sharp,size: 14,), onPressed: ()=> onBack),
             ),
             Center(

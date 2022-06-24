@@ -84,11 +84,10 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   # 加密
   crypto: ^3.0.2
-  # 指示器
-  smooth_page_indicator: ^1.0.0+2
-  carousel_slider: ^4.1.1
-  # 轮播图
+  # 轮播图&指示器
   flutter_swiper_plus: ^2.0.4
+  carousel_slider: ^4.1.1
+  smooth_page_indicator: ^1.0.0+2
   # 视频播放器
   video_player: ^2.4.2
 

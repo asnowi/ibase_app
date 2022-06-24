@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:ibase_app/common/config/config.dart';
-import 'package:ibase_app/common/entity/entity.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 
 import 'http.dart';
@@ -38,53 +37,58 @@ class DioInterceptors extends Interceptor {
       // response.data = DioResponse(errorCode: DioResponseCode.SUCCESS, errorMsg: "操作成功~!", data: response.data);
       final body = response.data;
       if(body == null) {
-        response.data = DioResponse(code: DioResponseCode.ERROR, msg: "操作失败~!");
+        response.data = DioResponse(code: DioResponseCode.ERROR, message: "操作失败~!");
       } else {
-        if(response.requestOptions.path.contains('/login/cellphone')) {
-          final code = body['code'];
-          final msg = body['msg'];
+        final code = body['code'];
+        final msg = body['message'];
+        final data = body['data'];
+        response.data = DioResponse(code: code, message: msg,data: data);
 
-          if(code == 200) {
-            final account = body['account'];
-            final profile = body['profile'];
-            final token = body['token'];
-
-            final data = {
-              'userId': profile['userId'],
-              'nickname': profile['nickname'],
-              'token': token,
-              'avatar': profile['avatarUrl'],
-              'username': account['userName']
-            };
-            response.data = DioResponse(code: code, msg: msg,data: data);
-          } else {
-            response.data = DioResponse(code: code, msg: msg,data: null);
-          }
-
-        } else if(response.requestOptions.path.contains('/top/artists')){
-          final code = body['code'];
-          final msg = body['msg'];
-
-          if(code == 200) {
-            final more = body['more'];
-            final List<dynamic> artists = body['artists'];
-            final data = {
-              'more': more,
-              'artists': artists,
-            };
-            response.data = DioResponse(code: code, msg: msg,data: data);
-          } else {
-            response.data = DioResponse(code: code, msg: msg,data: null);
-          }
-        } else {
-          final code = body['code'];
-          final msg = body['msg'];
-          final data = body['data'];
-          response.data = DioResponse(code: code, msg: msg,data: data);
-        }
+        // if(response.requestOptions.path.contains('/login/cellphone')) {
+        //   final code = body['code'];
+        //   final msg = body['msg'];
+        //
+        //   if(code == 200) {
+        //     final account = body['account'];
+        //     final profile = body['profile'];
+        //     final token = body['token'];
+        //
+        //     final data = {
+        //       'userId': profile['userId'],
+        //       'nickname': profile['nickname'],
+        //       'token': token,
+        //       'avatar': profile['avatarUrl'],
+        //       'username': account['userName']
+        //     };
+        //     response.data = DioResponse(code: code, msg: msg,data: data);
+        //   } else {
+        //     response.data = DioResponse(code: code, msg: msg,data: null);
+        //   }
+        //
+        // } else if(response.requestOptions.path.contains('/top/artists')){
+        //   final code = body['code'];
+        //   final msg = body['msg'];
+        //
+        //   if(code == 200) {
+        //     final more = body['more'];
+        //     final List<dynamic> artists = body['artists'];
+        //     final data = {
+        //       'more': more,
+        //       'artists': artists,
+        //     };
+        //     response.data = DioResponse(code: code, msg: msg,data: data);
+        //   } else {
+        //     response.data = DioResponse(code: code, msg: msg,data: null);
+        //   }
+        // } else {
+        //   final code = body['code'];
+        //   final msg = body['msg'];
+        //   final data = body['data'];
+        //   response.data = DioResponse(code: code, msg: msg,data: data);
+        // }
       }
     } else {
-      response.data = DioResponse(code: DioResponseCode.ERROR, msg: "操作失败~!");
+      response.data = DioResponse(code: DioResponseCode.ERROR, message: "操作失败~!");
     }
 
     // 对某些单独的url返回数据做特殊处理

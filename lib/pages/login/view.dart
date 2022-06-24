@@ -228,7 +228,7 @@ class LoginView extends BaseGetView<LoginController> {
     );
   }
   Widget _buildInputPassword(){
-    const String _password = 'gaoguanqi109';
+    const String _password = '11111111';
     if(_password.isNotEmpty){
       controller.passwordController.text = _password;
       controller.setPassword(controller.passwordController.text.isNotEmpty);

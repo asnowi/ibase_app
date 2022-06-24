@@ -79,6 +79,9 @@ class Refresh extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
+                    // ConstrainedBox(constraints: BoxConstraints.expand(),
+                    //   child: Image.asset(AssetsProvider.imagePath('welcome_1'), fit: BoxFit.fitWidth),
+                    // ),
                     Lottie.asset(
                       AssetsProvider.lottiePath('refresh'),
                       // AssetsProvider.lottiePath('loadingYellow'),

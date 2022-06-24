@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:ibase_app/common/utils/utils.dart';
+import 'package:ibase_app/pages/banner/banner.dart';
 import 'package:ibase_app/pages/home/home.dart';
 import 'package:ibase_app/pages/home/nav/first/first.dart';
 import 'package:ibase_app/pages/home/nav/mine/mine.dart';
@@ -82,6 +83,12 @@ class AppPages {
       name: AppRoutes.LIST,
       page: () => View.ListView(),
       binding: ListBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.BANNER,
+      page: () => BannerView(),
+      binding: BannerBinding(),
     ),
   ];
 

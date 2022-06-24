@@ -78,7 +78,7 @@ class ListView extends BaseGetView<ListController>{
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(controller.list[index].name??'',style: TextStyle(fontSize: 14.sp,color: Colors.black87,fontWeight: FontWeight.bold)),
-                  Text('粉丝:${controller.list[index].fansCount}',style: TextStyle(fontSize: 12.sp,color: Colors.black87)),
+                  Text('粉丝:${controller.list[index].musicSize}',style: TextStyle(fontSize: 12.sp,color: Colors.black87)),
                 ],
               )
             ],
