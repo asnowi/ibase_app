@@ -37,6 +37,7 @@ class Global{
      DioUtil.getInstance()?..openLog()..setHttpsCertificateVerification(enable: true);
 
      user = dbUtil?.getUser();
+     LogUtils.GGQ('==========User========>>>>${user}');
     // 业务服务
     Get.put<ConfigService>(ConfigService());
   }

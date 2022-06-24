@@ -9,6 +9,7 @@ class UserAdapter extends TypeAdapter<User>{
     return User(
       userId: reader.read(),
       token: reader.read(),
+      username: reader.read(),
       phone: reader.read(),
       avatarImg: reader.read(),
     );
@@ -21,6 +22,7 @@ class UserAdapter extends TypeAdapter<User>{
   void write(BinaryWriter writer, User obj) {
     writer.write(obj.userId);
     writer.write(obj.token);
+    writer.write(obj.username);
     writer.write(obj.phone);
     writer.write(obj.avatarImg);
   }

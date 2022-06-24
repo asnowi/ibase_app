@@ -59,9 +59,12 @@ class LoginController extends BaseGetController with WidgetsBindingObserver{
             final User user = User();
             user.userId = entity.userId;
             user.token = entity.token;
-            user.username = entity.nickname;
+            user.username = entity.username;
             user.phone = entity.phone;
             user.avatarImg = entity.avatarUrl;
+
+            LogUtils.GGQ('------登录结果:------>>>${user.username}');
+            LogUtils.GGQ('------登录结果:------>>>${entity.username}');
 
             final int? result = await Global.dbUtil?.saveUser(user);
             if(result != null && result >= 0) {
