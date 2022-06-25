@@ -9,7 +9,7 @@ class ListController extends BaseGetController{
 
   final RefreshController refreshController = RefreshController();
 
-  List<ArtistsEntity> list = [];
+  List<RecordEntity> list = [];
 
   int nextPage = 1;
 
@@ -34,15 +34,13 @@ class ListController extends BaseGetController{
   @override
   void initPullLoading() {
     nextPage = 1;
-    isMore = true;
-    ApiService.getArtistsList(nextPage, 10).then((value) async{
+    ApiService.getUserLoginRecordList(nextPage, 10).then((value) async{
       LogUtils.GGQ('------列表:------>>>${value.code}');
       if(ResponseUtils.isSuccess(value.code)) {
         final entity = ListEntity.fromJson(value.data);
-        isMore = entity.more?? true;
-        if(entity.artists != null && entity.artists!.isNotEmpty) {
+        if(entity.list != null && entity.list!.isNotEmpty) {
           list.clear();
-          list.addAll(entity.artists!);
+          list.addAll(entity.list!);
           loadState = LoadState.success;
         }else {
           loadState = LoadState.empty;
@@ -62,13 +60,12 @@ class ListController extends BaseGetController{
   void onRefresh() {
     nextPage = 1;
     isMore = true;
-    ApiService.getArtistsList(nextPage, 10).then((value) async{
+    ApiService.getUserLoginRecordList(nextPage, 10).then((value) async{
       if(ResponseUtils.isSuccess(value.code)) {
         final entity = ListEntity.fromJson(value.data);
-        isMore = entity.more?? true;
-        if(entity.artists != null && entity.artists!.isNotEmpty) {
+        if(entity.list != null && entity.list!.isNotEmpty) {
           list.clear();
-          list.addAll(entity.artists!);
+          list.addAll(entity.list!);
         }else {
           ToastUtils.showBar(ResponseUtils.getMessage(value.message));
         }
@@ -87,11 +84,11 @@ class ListController extends BaseGetController{
   void onLoadMore() {
     if(isMore) {
       nextPage ++;
-      ApiService.getArtistsList(nextPage, 10).then((value) async{
+      ApiService.getUserLoginRecordList(nextPage, 10).then((value) async{
         if(ResponseUtils.isSuccess(value.code)) {
           final entity = ListEntity.fromJson(value.data);
-          if(entity.artists != null && entity.artists!.isNotEmpty) {
-            list.addAll(entity.artists!);
+          if(entity.list != null && entity.list!.isNotEmpty) {
+            list.addAll(entity.list!);
             if(refreshController.isLoading) {
               refreshController.loadComplete();
             }

@@ -63,6 +63,8 @@ class LoginController extends BaseGetController with WidgetsBindingObserver{
             user.phone = entity.phone;
             user.avatarImg = entity.avatarUrl;
 
+            StorageUtil().setJSON(SaveInfoKey.TOKEN, entity.token);
+
             LogUtils.GGQ('------登录结果:------>>>${user.username}');
             LogUtils.GGQ('------登录结果:------>>>${entity.username}');
 

@@ -12,13 +12,14 @@ class ApiService{
   }
 
 
-  ///  列表
-  static Future<DioResponse>getArtistsList(
-      int offset,
+  /// 列表
+  static Future<DioResponse> getUserLoginRecordList(
+      int page,
       int limit) async{
-    return await DioUtil().request<DioResponse>('/top/artists',method: DioMethod.get,params: {
-      'offset': offset,
-      'limit': limit,
+    return await DioUtil().request<DioResponse>('/api/core/userLoginRecord/list',method: DioMethod.get,params: {
+      'keyword': '',
+      'page': page,
+      'limit' : limit
     });
   }
 }

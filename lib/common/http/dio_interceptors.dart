@@ -17,6 +17,7 @@ class DioInterceptors extends Interceptor {
     // 头部添加token
     final String? token = StorageUtil().getJSON(SaveInfoKey.TOKEN);
     if(token != null && token.isNotEmpty) {
+      LogUtils.GGQ('-----DioInterceptors--TOKEN---->>${token}');
       options.headers["token"] = token;
     }
 

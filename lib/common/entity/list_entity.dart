@@ -1,58 +1,74 @@
 class ListEntity {
 
   ListEntity({
-    this.more,
-    this.artists,
+    this.current,
+    this.total,
+    this.pages,
+    this.size,
   });
 
   ListEntity.fromJson(dynamic json) {
-    more = json['more'];
-    if (json['artists'] != null) {
-      artists = [];
-      json['artists'].forEach((v) {
-        artists?.add(ArtistsEntity.fromJson(v));
+    current = json['current'];
+    total = json['total'];
+    pages = json['pages'];
+    size = json['size'];
+
+    if (json['list'] != null) {
+        list = [];
+        json['list'].forEach((v) {
+        list?.add(RecordEntity.fromJson(v));
       });
     }
   }
-  bool? more;
-  List<ArtistsEntity>? artists;
+  int? current;
+  int? total;
+  int? pages;
+  int? size;
+  List<RecordEntity>? list;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['more'] = more;
-    if (artists != null) {
-      map['artists'] = artists?.map((v) => v.toJson()).toList();
+    if (list != null) {
+      map['list'] = list?.map((v) => v.toJson()).toList();
     }
     return map;
   }
 }
 
 
-class ArtistsEntity {
-  ArtistsEntity({
-    this.name,
-    this.picUrl,
-    this.img1v1Url,
-    this.musicSize,
+class RecordEntity {
+  RecordEntity({
+    this.id,
+    this.userId,
+    this.username,
+    this.phone,
+    this.ip,
+    this.createTime,
   });
 
-  ArtistsEntity.fromJson(dynamic json) {
-    name = json['name'];
-    picUrl = json['picUrl'];
-    img1v1Url = json['img1v1Url'];
-    musicSize = json['musicSize']?.toString();
+  RecordEntity.fromJson(dynamic json) {
+    id = json['id'].toString();
+    userId = json['userId'].toString();
+    username = json['username'];
+    phone = json['phone'];
+    ip = json['ip'];
+    createTime = json['createTime'];
   }
-  String? name;
-  String? picUrl;
-  String? img1v1Url;
-  String? musicSize;
+  String? id;
+  String? userId;
+  String? username;
+  String? phone;
+  String? ip;
+  String? createTime;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['name'] = name;
-    map['picUrl'] = picUrl;
-    map['img1v1Url'] = img1v1Url;
-    map['musicSize'] = musicSize?.toString();
+    map['id'] = id;
+    map['userId'] = userId;
+    map['username'] = username;
+    map['phone'] = phone;
+    map['ip'] = ip;
+    map['createTime'] = createTime;
     return map;
   }
 

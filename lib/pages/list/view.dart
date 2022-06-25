@@ -70,15 +70,17 @@ class ListView extends BaseGetView<ListController>{
               ClipOval(
                 child: ConstrainedBox(
                   constraints: BoxConstraints.loose(const Size(52,52)),
-                  child: ImageLoader.load(url: controller.list[index].img1v1Url!)),
+                  child: ImageLoader.load(url: '')),
                 ) ,
               const Padding(padding: EdgeInsets.symmetric(horizontal: 6.0)),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(controller.list[index].name??'',style: TextStyle(fontSize: 14.sp,color: Colors.black87,fontWeight: FontWeight.bold)),
-                  Text('粉丝:${controller.list[index].musicSize}',style: TextStyle(fontSize: 12.sp,color: Colors.black87)),
+                  Text(controller.list[index].username??'',style: TextStyle(fontSize: 14.sp,color: Colors.black87,fontWeight: FontWeight.bold)),
+                  Text('手机号:${controller.list[index].phone}',style: TextStyle(fontSize: 12.sp,color: Colors.black87)),
+                  Text('IP:${controller.list[index].ip}',style: TextStyle(fontSize: 12.sp,color: Colors.black87)),
+                  Text('创建时间:${controller.list[index].createTime}',style: TextStyle(fontSize: 12.sp,color: Colors.black87)),
                 ],
               )
             ],
