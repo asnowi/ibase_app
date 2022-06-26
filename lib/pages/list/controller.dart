@@ -93,7 +93,6 @@ class ListController extends BaseGetController{
               refreshController.loadComplete();
             }
           }else {
-            ToastUtils.showBar(ResponseUtils.getMessage(value.message));
             if(refreshController.isLoading) {
               refreshController.loadNoData();
             }
