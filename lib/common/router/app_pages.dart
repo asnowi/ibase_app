@@ -9,6 +9,7 @@ import 'package:ibase_app/pages/login/login.dart';
 import 'package:ibase_app/pages/setting/setting.dart';
 import 'package:ibase_app/pages/splash/splash.dart';
 import 'package:ibase_app/pages/unknown/unknown.dart';
+import 'package:ibase_app/pages/userInfo/userInfo.dart';
 import 'package:ibase_app/pages/welcome/welcome.dart';
 
 import 'package:ibase_app/pages/list/view.dart' as View;
@@ -89,6 +90,12 @@ class AppPages {
       name: AppRoutes.BANNER,
       page: () => BannerView(),
       binding: BannerBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.USER_INFO,
+      page: () => UserInfoView(),
+      binding: UserInfoBinding(),
     ),
   ];
 

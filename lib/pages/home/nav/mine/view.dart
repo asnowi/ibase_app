@@ -102,7 +102,7 @@ class MineView extends BaseGetView<MineController> {
         ],
       ),
       onTap: (){
-        ToastUtils.showBar('用户信息');
+        Get.toNamed(AppRoutes.USER_INFO);
       },
     );
   }

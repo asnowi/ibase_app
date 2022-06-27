@@ -12,6 +12,7 @@ abstract class AppRoutes {
   /// demo
   static const LIST = '/list';
   static const BANNER = '/banner';
+  static const USER_INFO = '/userInfo';
 
 
   static const TEST = '/test';

@@ -90,6 +90,8 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   # 视频播放器
   video_player: ^2.4.2
+  # 图片选择器
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:
