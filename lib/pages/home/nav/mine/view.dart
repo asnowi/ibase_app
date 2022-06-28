@@ -1,3 +1,4 @@
+import 'package:ibase_app/common/api/api.dart';
 import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/router/router.dart';
@@ -216,15 +217,20 @@ class MineView extends BaseGetView<MineController> {
   }
 
   void _showLogout(BuildContext context) {
-    TipDialog.show(() async{
-        LogUtils.GGQ('==onConfirm==>>>>');
-        bool? result = await Global.dbUtil?.clearUser();
-        if(result != null && result) {
-          controller.clearUser();
-          TipDialog.dismiss();
-        } else {
-          ToastUtils.show('退出失败!');
-        }
+    TipDialog.show(() {
+        ApiService.logout().then((value) async{
+          if(ResponseUtils.isSuccess(value.code)) {
+            LogUtils.GGQ('==onConfirm==>>>>');
+            bool? result = await Global.dbUtil?.clearUser();
+            if(result != null && result) {
+              controller.clearUser();
+              TipDialog.dismiss();
+              ToastUtils.show(value.message);
+            } else {
+              ToastUtils.show('退出失败!');
+            }
+          }
+        });
       },content: '您确定要退出账号?',confirm: '确定退出?',cancel: '再看一看');
   }
 

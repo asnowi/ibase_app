@@ -8,7 +8,12 @@ class ApiService{
     return await DioUtil().request<DioResponse>('/api/core/user/login',method: DioMethod.post,data: {
       'username': username,
       'password': password,
-    });
+    },hasShowLoading: false);
+  }
+
+  /// 退出登录
+  static Future<DioResponse>logout() async{
+    return await DioUtil().request<DioResponse>('/api/core/user/logout',method: DioMethod.post, hasShowLoading: false);
   }
 
 
@@ -20,7 +25,7 @@ class ApiService{
       'keyword': '',
       'page': page,
       'limit' : limit
-    });
+    },hasShowLoading: false);
   }
 
   /// 检查版本

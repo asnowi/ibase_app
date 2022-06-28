@@ -9,7 +9,6 @@ import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
-import 'package:path_provider/path_provider.dart';
 
 class MineController extends BaseGetController with WidgetsBindingObserver{
 
