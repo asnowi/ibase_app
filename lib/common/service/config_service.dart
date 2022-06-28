@@ -44,8 +44,18 @@ class ConfigService extends GetxService{
 
 
 
-   Future<String> getAppVersion() async{
+   Future<String> getVersionName() async{
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
       return packageInfo.version;
+  }
+
+  Future<String> getVersionCode() async{
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.buildNumber;
+  }
+
+  Future<String> getPackageName() async{
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.packageName;
   }
 }

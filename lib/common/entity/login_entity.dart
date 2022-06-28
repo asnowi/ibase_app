@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class LoginEntity {
   LoginEntity({
       this.userId,

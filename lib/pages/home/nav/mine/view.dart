@@ -184,7 +184,7 @@ class MineView extends BaseGetView<MineController> {
                       ),
                     ),
                     onClick: (){
-                      ToastUtils.show(controller.version);
+                      controller.checkVersion();
                     },),
                   const Padding(padding: EdgeInsets.only(top: 50)),
                   FractionallySizedBox(

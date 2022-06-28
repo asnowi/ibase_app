@@ -50,7 +50,8 @@ class UserInfoView extends BaseGetView<UserInfoController>{
  Widget _buildHeader() {
     return GestureDetector(
       onTap: (){
-        ToastUtils.show('msg');
+       // ToastUtils.show('msg');
+        controller.showImagePicker();
       },
       child: Container(
         width: getWidth(),

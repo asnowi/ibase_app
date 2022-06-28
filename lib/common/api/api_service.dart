@@ -22,4 +22,12 @@ class ApiService{
       'limit' : limit
     });
   }
+
+  /// 检查版本
+  static Future<DioResponse> getAppVersion(String appId,String appType) async{
+    return await DioUtil().request<DioResponse>('/api/core/appInfo/checkAppVersion',method: DioMethod.get,params: {
+      'appId': appId,
+      'appType': appType,
+    });
+  }
 }

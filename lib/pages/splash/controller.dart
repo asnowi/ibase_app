@@ -14,12 +14,17 @@ class SplashController extends BaseGetController {
   @override
   void onReady() {
     LogUtils.GGQ('启动页---> onReady');
+    launchTarget();
+    super.onReady();
+  }
+
+
+  void launchTarget() {
     if(ConfigService.to.isHomeOpen) {
       Get.offAndToNamed(AppRoutes.HOME);
     } else {
-     Get.offAndToNamed(AppRoutes.WELCOME);
+      Get.offAndToNamed(AppRoutes.WELCOME);
     }
-    super.onReady();
   }
 
   @override

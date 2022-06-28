@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:ibase_app/common/config/config.dart';
 import 'package:ibase_app/common/utils/logger.dart';
+import 'package:ibase_app/common/utils/utils.dart';
 
 import 'http.dart';
 
@@ -121,6 +122,7 @@ class DioUtil {
     Options? options,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    bool? hasShowLoading = true
   }) async {
     const _methodValues = {
       DioMethod.get: 'get',
@@ -133,6 +135,9 @@ class DioUtil {
 
     options ??= Options(method: _methodValues[method]);
     try {
+      if(hasShowLoading?? false) {
+        Loading.show();
+      }
       Response response;
       response = await _dio.request(path,
           data: data,
@@ -148,6 +153,9 @@ class DioUtil {
       LogUtils.GGQ('==http==DioError==>>>>>${e.message}');
       return e.response?.data;
     } finally {
+      if(hasShowLoading?? false) {
+        Loading.dismiss();
+      }
       LogUtils.GGQ('----finally-----');
     }
   }

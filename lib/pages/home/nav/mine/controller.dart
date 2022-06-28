@@ -1,13 +1,15 @@
 import 'dart:async';
-
+import 'package:ibase_app/common/api/api.dart';
 import 'package:ibase_app/common/base/base.dart';
 import 'package:ibase_app/common/app/app.dart';
 import 'package:ibase_app/common/config/config.dart';
 import 'package:ibase_app/common/db/db.dart';
+import 'package:ibase_app/common/entity/version_entity.dart';
 import 'package:ibase_app/common/router/router.dart';
 import 'package:ibase_app/common/service/service.dart';
 import 'package:ibase_app/common/utils/utils.dart';
 import 'package:ibase_app/common/widget/button/loading_button.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MineController extends BaseGetController with WidgetsBindingObserver{
 
@@ -51,7 +53,7 @@ class MineController extends BaseGetController with WidgetsBindingObserver{
       user = Global.user;
       update(['user']);
     }
-    ConfigService.to.getAppVersion().then((value) => {
+    ConfigService.to.getVersionName().then((value) => {
       version = '当前版本 V${value}',
       update(['version'])
     });
@@ -82,5 +84,34 @@ class MineController extends BaseGetController with WidgetsBindingObserver{
     }
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  void checkVersion() async{
+    String packageName = await ConfigService.to.getPackageName();
+    String appType = "";
+    if(Global.isAndroid) {
+      appType = "0";
+    } else if(Global.isIOS) {
+      appType = "1";
+    }
+
+    if(!(GetUtils.isBlank(packageName)!) && !(GetUtils.isBlank(appType)!)) {
+      ApiService.getAppVersion(packageName, appType).then((value) async{
+        if(ResponseUtils.isSuccess(value.code)) {
+          final entity = VersionEntity.fromJson(value.data['appInfo']);
+          String versionCode = await ConfigService.to.getVersionCode();
+          String? downloadPath = '';
+          if(entity.versionCode != null && entity.downloadUrl != null && downloadPath != null) {
+            if(entity.versionCode! > int.parse(versionCode)) {
+              LogUtils.GGQ('新版本下载地址--->>${entity.downloadUrl}>');
+            } else {
+              ToastUtils.showBar('已经是最新版本！');
+            }
+          }
+        } else {
+          ToastUtils.showBar(ResponseUtils.getMessage(value.message));
+        }
+      });
+    }
   }
 }

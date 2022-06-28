@@ -15,6 +15,7 @@ export 'storage.dart';
 export 'toast.dart';
 export 'time_util.dart';
 export 'dialog_utils.dart';
+export 'permission_util.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter/material.dart';
