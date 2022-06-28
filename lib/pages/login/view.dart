@@ -170,11 +170,11 @@ class LoginView extends BaseGetView<LoginController> {
   }
 
   Widget _buildInputAccount(){
-    const String _phone = '13717591366';
-    if(_phone.isNotEmpty){
-      controller.accountController.text = _phone;
-      controller.setAccount(controller.accountController.text.isNotEmpty);
-    }
+    // const String _phone = '13717591366';
+    // if(_phone.isNotEmpty){
+    //   controller.accountController.text = _phone;
+    //   controller.setAccount(controller.accountController.text.isNotEmpty);
+    // }
     return ConstrainedBox(
       constraints: BoxConstraints(
           maxHeight: 48.h,
@@ -228,11 +228,11 @@ class LoginView extends BaseGetView<LoginController> {
     );
   }
   Widget _buildInputPassword(){
-    const String _password = '11111111';
-    if(_password.isNotEmpty){
-      controller.passwordController.text = _password;
-      controller.setPassword(controller.passwordController.text.isNotEmpty);
-    }
+    // const String _password = '11111111';
+    // if(_password.isNotEmpty){
+    //   controller.passwordController.text = _password;
+    //   controller.setPassword(controller.passwordController.text.isNotEmpty);
+    // }
     return ConstrainedBox(
       constraints: BoxConstraints(
           maxHeight: 48.h,
